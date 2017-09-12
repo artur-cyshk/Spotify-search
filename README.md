@@ -1,0 +1,1 @@
+This application allows user to sign in, search and get music from spotify.
