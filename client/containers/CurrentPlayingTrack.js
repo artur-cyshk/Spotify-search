@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { CurrentPlayingTrack } from '../components';
+import CurrentPlayingTrack from '../components/CurrentPlayingTrack';
 import { getCurrentPlayingTrack } from '../actions/creators';
 
 export default connect(

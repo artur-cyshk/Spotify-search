@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Search } from '../components';
+import Search from '../components/Search';
 import { searchTracks } from '../actions/creators';
 
 export default connect(

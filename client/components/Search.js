@@ -1,5 +1,5 @@
 import React from 'react';
-import Track from './Track';
+import { Track } from './';
 
 
 export default ({ tracks, searchTracks }) => {

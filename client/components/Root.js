@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Router } from 'react-router';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { historyService } from '../services';
-import { Logo, Login } from '../components';
-import { Search, CurrentPlayingTrack } from './';
+import { Logo, Login } from './';
+import { Search, CurrentPlayingTrack } from '../containers';
 import { APPLICATION_TITLE } from '../constants';
 
-class Root extends Component {
+export default class Root extends Component {
     render() {
     	const history = historyService.getHistory();
     	return (
@@ -26,5 +26,3 @@ class Root extends Component {
 	    );
     }
 }
-
-export default Root;
