@@ -4,7 +4,9 @@ import Search from './Search';
 import CurrentPlayingTrack from './CurrentPlayingTrack';
 import Logo from './Logo';
 import Track from './Track';
+import Navigate from './Navigate';
+import Spinner from './Spinner';
 
 export {
-	 Root, Logo, Login, Search, CurrentPlayingTrack, Track
+	 Root, Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner
 }

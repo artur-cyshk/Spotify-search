@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { localStorageService, historyService } from '../services';
+import '../styles/login.less';
 
 export default class Login extends Component {
 
@@ -20,9 +21,11 @@ export default class Login extends Component {
         const { errorMsg } = this.props.match.params;
         return (
             <div className="login">
-                <h2>Here's our login page!</h2>
-                <a href="/login">sign in using spotify</a>
-                <div className="error-msg">{errorMsg}</div>
+                <h2>Sign In</h2>
+                <div>
+                    <a href="/login">sign in using spotify</a>
+                    <span className="error">{errorMsg}</span>
+                </div>
             </div>
         );
     }

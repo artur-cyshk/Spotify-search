@@ -1,0 +1,39 @@
+@import './colors.less';
+
+.track-in-list {
+	width: 300px;
+	height: 300px;
+	position: relative;
+	flex-direction: column;
+	justify-content: flex-end;
+	display: inline-flex;
+	margin: 10px;
+
+	& > img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		border-radius: 3px;
+		height: 100%;
+		object-fit: contain;
+	}
+	& > .track-in-list-info {
+		padding: 5px;
+	    position: relative;
+	    background: @blackWithTransparent;
+	    display: flex;
+	    flex-direction: column;
+
+	    & > span {
+	    	white-space: nowrap;
+	    	overflow: hidden;
+	    	text-overflow: ellipsis;
+
+	    	& > i {
+	    		margin-right: 5px;
+	    		color: @grey;
+	    	}
+	    }
+	}
+}

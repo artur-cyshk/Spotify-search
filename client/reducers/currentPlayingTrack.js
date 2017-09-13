@@ -2,8 +2,7 @@ import { GET_CURRENT_PLAYING_TRACK, GET_CURRENT_PLAYING_TRACK_READY, GET_CURRENT
 
 const initialState = {
 	track: {},
-	loading: true,
-	error: ''
+	error: {}
 };
 
 export default (state = initialState, action) => {
@@ -11,7 +10,7 @@ export default (state = initialState, action) => {
 		case GET_CURRENT_PLAYING_TRACK: 
 			return {
 				loading: true,
-				error: '',
+				error: {},
 				track: Object.assign({}, state.track)
 			};
 		case GET_CURRENT_PLAYING_TRACK_READY:
@@ -19,7 +18,7 @@ export default (state = initialState, action) => {
 			return {
 				track: Object.assign({}, item),
 				loading: false,
-				error: ''
+				error: {}
 			};
 		case GET_CURRENT_PLAYING_TRACK_FAILURE: 
 			const { error } = action.payload;

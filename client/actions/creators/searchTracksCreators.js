@@ -1,7 +1,7 @@
 import * as actionTypes from '../types';
 import { MUSIC_LIST_LIMIT, SPOTIFY_METHODS } from '../../constants';
 
-export const tracksReady = (res, err) => {
+const tracksReady = (res, err) => {
   return {
     type: res ? actionTypes.SEARCH_TRACKS_READY : actionTypes.SEARCH_TRACKS_FAILURE,
     payload: res || err
@@ -18,4 +18,10 @@ export const searchTracks = (searchValue) => {
       options: [searchValue, { limit: MUSIC_LIST_LIMIT}]
     }
   };
+}
+
+export const clearTracksList = () => {
+  return {
+    type: actionTypes.CLEAR_TRACKS_LIST
+  }
 }

@@ -34,7 +34,7 @@ router.get('/callback', (req, res) => {
   const { code, state } = req.query;
   const storedState = req.cookies ? req.cookies[STATE_KEY] : null;
   if (state === null || state !== storedState) {
-    res.redirect('/#/error/state mismatch');
+    res.redirect('/#/error/Error while sign in, try again');
   } else {
     res.clearCookie(STATE_KEY);
     spotifyApi.authorizationCodeGrant(code).then(data => {
@@ -42,7 +42,7 @@ router.get('/callback', (req, res) => {
       spotifyApi.setAccessToken(access_token);
       res.redirect(`/#/success/${access_token}`);
     }).catch(err => {
-      res.redirect('/#/error/invalid token');
+      res.redirect('/#/error/Error while sign in, try again');
     });
   }
 });

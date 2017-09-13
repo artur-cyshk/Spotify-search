@@ -1,18 +1,24 @@
-import { SEARCH_TRACKS, SEARCH_TRACKS_READY, SEARCH_TRACKS_FAILURE } from '../actions/types';
+import { SEARCH_TRACKS, SEARCH_TRACKS_READY, SEARCH_TRACKS_FAILURE, CLEAR_TRACKS_LIST } from '../actions/types';
 
 const initialState = {
 	list: [],
-	total: 0,
-	loading: true,
-	error: ''
+	loading: false,
+	error: {}
 };
 
 export default (state = initialState, action) => {
 	switch (action.type) {
+		case CLEAR_TRACKS_LIST:
+			return {
+				list: [],
+				error: {},
+				loading: false
+			};
 		case SEARCH_TRACKS: 
 			return {
 				loading: true,
-				error: '',
+				error: {},
+				total: state.total,
 				list: Object.assign([], state.list)
 			};
 		case SEARCH_TRACKS_READY:
@@ -21,13 +27,12 @@ export default (state = initialState, action) => {
 				list: Object.assign([], items),
 				total: total,
 				loading: false,
-				error: ''
+				error: {}
 			};
 		case SEARCH_TRACKS_FAILURE: 
 			const { error } = action.payload;
 			return {
 				list: [],
-				total: 0,
 				error: error,
 				loading: false
 			};

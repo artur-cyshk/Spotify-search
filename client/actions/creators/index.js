@@ -1,6 +1,6 @@
-import { searchTracks } from './searchTracksCreators';
+import { searchTracks, clearTracksList } from './searchTracksCreators';
 import { getCurrentPlayingTrack } from './getCurrentPlayingTrackCreators';
 
 export {
-  searchTracks, getCurrentPlayingTrack
+  searchTracks, clearTracksList, getCurrentPlayingTrack
 }
