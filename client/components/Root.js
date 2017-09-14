@@ -19,6 +19,7 @@ class Root extends Component {
     render() {
     	const history = historyService.getHistory();
     	const { isAuthorized, setAuthorization } = this.props;
+
     	return (
 		    <Router history={history}>
 		    	<main>
@@ -28,14 +29,21 @@ class Root extends Component {
 			    	</div>
 			    	<div className="content">
 			    		<Switch>
-				    		<Route path="/error/:errorMsg" render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />    	
-			    			{isAuthorized && <Route path="/search" component={Search} />}
-			    			{isAuthorized && <Route path="/current-playing" component={CurrentPlayingTrack} />}
-			    			{isAuthorized && <Redirect to="/search"/>}	
-
-			    			{isAuthorized === false && <Route path="/login" component={Login} />}
-			    			{isAuthorized === false && <Route path="/success/:accessToken"  render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />}
-			    			{isAuthorized === false && <Redirect to="/login"/>}
+				    		<Route path="/error/:errorMsg" render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />  
+				    		{isAuthorized &&
+				    			<div>
+						    		<Route path="/search" component={Search} />
+					    			<Route path="/current-playing" component={CurrentPlayingTrack} />
+					    			<Redirect to="/search"/>
+				    			</div>
+				    		}  	
+				    		{isAuthorized === false &&
+				    			<div>
+					    			<Route path="/login" component={Login} />
+					    			<Route path="/success/:accessToken"  render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />
+					    			<Redirect to="/login"/>
+				    			</div>
+				    		} 
 		    			</Switch>
 			    	</div>
 		    	</main>

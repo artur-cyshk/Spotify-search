@@ -30,7 +30,7 @@ class Search extends Component {
 		const tracksList = tracks.list.map((track) => <Track key={track.id} info={track}/>);
 		return (
 			<div className="search-wrapper">
-				<h2>Search tracks  {tracks.loading && <Spinner/>} </h2>
+				<header>Search tracks  {tracks.loading && <Spinner/>} </header>
 				<div className="search-block">
 					<input type="text" placeholder="Search tracks" className="search-input" onKeyUp={this.searchTracksHandler}/>
 					<div className="search-result">

@@ -16,7 +16,7 @@ export default class CurrentPlayingTrack extends Component {
         const artists = (track.artists || []).map((artist) => artist.name).join();
         return (
             <div className="current-playing">
-                <h2>Now playing {loading && <Spinner/>}</h2>
+                <header>Now playing {loading && <Spinner/>}</header>
                 <div hidden={loading}>
                     <span className="warning" hidden={!!track.name}>
                         { error.message ? error.message : 'There are no playing tracks' }

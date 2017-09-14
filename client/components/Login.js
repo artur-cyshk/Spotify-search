@@ -23,7 +23,7 @@ export default class Login extends Component {
         const { errorMsg } = this.props.match.params;
         return (
             <div className="login">
-                <h2>Sign In</h2>
+                <header>Sign In</header>
                 <div>
                     <a href="/login">sign in using spotify</a>
                     <span className="error">{errorMsg}</span>
