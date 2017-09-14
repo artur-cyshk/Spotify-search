@@ -14,17 +14,17 @@ export default (state = initialState, action) => {
 				track: Object.assign({}, state.track)
 			};
 		case GET_CURRENT_PLAYING_TRACK_READY:
-			const { item } = action.payload;
+			const { item } = action.payload || {};
 			return {
 				track: Object.assign({}, item),
 				loading: false,
 				error: {}
 			};
 		case GET_CURRENT_PLAYING_TRACK_FAILURE: 
-			const { error } = action.payload;
+			const { error } = action.payload || {};
 			return {
 				track: {},
-				error: error,
+				error: error || {},
 				loading: false
 			};
 		default:

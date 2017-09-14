@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { Track, Spinner } from './';
 import '../styles/search.less';
 
-export default class Login extends Component {
+class Search extends Component {
 
 	componentWillUnmount() {
 		this.props.clearTracksList();
@@ -23,7 +22,7 @@ export default class Login extends Component {
 							{tracks.error.message}
 						</span>
 						<span className="total-info">
-							{tracks.total !== undefined ? `Was founded ${tracks.total} tracks` : ''}
+							{tracks.total !== undefined ? `${tracks.total} tracks were found` : ''}
 						</span>
 					</div>
 					<ul className="tracks-list">
@@ -33,5 +32,16 @@ export default class Login extends Component {
 			</div>
 		);		
 	}
-	
 };
+
+Search.propTypes = {
+    tracks: PropTypes.shape({
+    	loading: PropTypes.bool,
+    	list: PropTypes.arrayOf(PropTypes.object),
+    	total: PropTypes.number,
+    	error: PropTypes.object
+    }),
+    searchTracks: PropTypes.func
+}
+
+export default Search;

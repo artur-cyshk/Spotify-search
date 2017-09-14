@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/spinner.less';
 
-export default ({ hidden }) => {
+const Spinner = ({ hidden }) => {
 	return (
 		<div hidden={hidden} className="spinner">
 		  <div className="bounce1"></div>
@@ -11,3 +12,8 @@ export default ({ hidden }) => {
 	);
 };
 
+Spinner.propTypes = {
+    hidden: PropTypes.bool
+};
+
+export default Spinner;

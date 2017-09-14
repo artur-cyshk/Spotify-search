@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/track.less';
 
-export default ({info}) => {
+const Track = ({info}) => {
     const album = info.album || {};
     const { images } = album;
     const artists = (info.artists || []).map((artist) => artist.name).join();
@@ -16,3 +17,13 @@ export default ({info}) => {
 		</li>
 	);
 };
+
+Track.propTypes = {
+    info: PropTypes.shape({
+    	album: PropTypes.object,
+    	artists: PropTypes.arrayOf(PropTypes.object),
+    	name: PropTypes.string
+    })
+};
+
+export default Track;
