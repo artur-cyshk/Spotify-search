@@ -30,12 +30,15 @@ class Search extends Component {
 		const tracksList = tracks.list.map((track) => <Track key={track.id} info={track}/>);
 		return (
 			<div className="search-wrapper">
-				<h2>Search tracks <Spinner hidden={!tracks.loading}/></h2>
+				<h2>Search tracks  {tracks.loading && <Spinner/>} </h2>
 				<div className="search-block">
 					<input type="text" placeholder="Search tracks" className="search-input" onKeyUp={this.searchTracksHandler}/>
 					<div className="search-result">
 						<span className="warning">
 							{tracks.error.message}
+						</span>
+						<span hidden={tracks.total !== undefined || tracks.error.message} className="warning">
+							Put something to start searching
 						</span>
 						<span className="total-info">
 							{tracks.total !== undefined ? `${tracks.total} tracks were found` : ''}

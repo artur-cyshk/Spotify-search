@@ -1,16 +1,16 @@
-import * as actionTypes from '../types';
+import { SEARCH_TRACKS, SEARCH_TRACKS_READY, SEARCH_TRACKS_FAILURE, CLEAR_TRACKS_LIST } from '../types';
 import { MUSIC_LIST_LIMIT, SPOTIFY_METHODS } from '../../constants';
 
 const tracksReady = (res, err) => {
   return {
-    type: res ? actionTypes.SEARCH_TRACKS_READY : actionTypes.SEARCH_TRACKS_FAILURE,
+    type: res ? SEARCH_TRACKS_READY : SEARCH_TRACKS_FAILURE,
     payload: res || err
   };
 }
 
 export const searchTracks = (searchValue) => {
   return { 
-    type: actionTypes.SEARCH_TRACKS,
+    type: SEARCH_TRACKS,
     onSuccess: (res, dispatch) => dispatch(tracksReady(res, null)),
     onFailure: (res, dispatch) => dispatch(tracksReady(null, res)),
     spotifyData: {
@@ -22,6 +22,6 @@ export const searchTracks = (searchValue) => {
 
 export const clearTracksList = () => {
   return {
-    type: actionTypes.CLEAR_TRACKS_LIST
+    type: CLEAR_TRACKS_LIST
   }
 }

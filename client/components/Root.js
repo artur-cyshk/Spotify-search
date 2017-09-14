@@ -1,34 +1,53 @@
 import React, { Component } from 'react';
 import { Router } from 'react-router';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { historyService } from '../services';
+import PropTypes from 'prop-types';
+import { historyService, localStorageService } from '../services';
 import { Logo, Login, Navigate } from './';
 import { Search, CurrentPlayingTrack } from '../containers';
 import { APPLICATION_TITLE, ROUTES_LINKS } from '../constants';
 import '../styles/main.less';
 
-export default class Root extends Component {
+class Root extends Component {
+
+	constructor(props) {
+		super(props);
+		const isAuthorized = !!localStorageService.getItem('accessToken');
+		this.props.setAuthorization(isAuthorized);
+	}
+
     render() {
     	const history = historyService.getHistory();
+    	const { isAuthorized, setAuthorization } = this.props;
     	return (
 		    <Router history={history}>
 		    	<main>
 		    		<div className="left-side-bar">
 		    			<Logo name={APPLICATION_TITLE}/>
-		    			<Navigate routes={ROUTES_LINKS}/>
+		    			<Navigate isAuthorized={isAuthorized} setAuthorization={setAuthorization} routes={ROUTES_LINKS}/>
 			    	</div>
 			    	<div className="content">
 			    		<Switch>
-						    <Route path="/login" component={Login} />
-						    <Route path="/success/:accessToken" component={Login} />
-						    <Route path="/error/:errorMsg" component={Login} />
-						    <Route path="/current-playing" component={CurrentPlayingTrack} />
-						    <Route path="/search" component={Search} />
-						    <Redirect to="/login"/>
-					    </Switch>
+				    		<Route path="/error/:errorMsg" render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />    	
+			    			{isAuthorized && <Route path="/search" component={Search} />}
+			    			{isAuthorized && <Route path="/current-playing" component={CurrentPlayingTrack} />}
+			    			{isAuthorized && <Redirect to="/search"/>}	
+
+			    			{isAuthorized === false && <Route path="/login" component={Login} />}
+			    			{isAuthorized === false && <Route path="/success/:accessToken"  render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />}
+			    			{isAuthorized === false && <Redirect to="/login"/>}
+		    			</Switch>
 			    	</div>
 		    	</main>
 		    </Router>
 	    );
     }
 }
+
+Root.propTypes = {
+    isAuthorized: PropTypes.bool,
+    setAuthorization: PropTypes.func
+};
+
+
+export default Root;

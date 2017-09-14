@@ -1,9 +1,8 @@
 @import './colors.less';
 
-nav {
+nav.app-navigation {
 	display: flex;
 	flex-direction: column;
-	margin-top: 30px;
 	flex: 1;
 	flex-direction: column;
 	font-weight: 200;
@@ -17,38 +16,42 @@ nav {
 		color: @white;
 		padding: 15px;
 	}
+}
 
-	& > a {
-		height: 170px;
-		width: 100%;
-		font-weight: 300;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-transform: capitalize;
-		flex-direction: column;
-		margin-bottom: 30px;
+a.nav-button {
+	height: 170px;
+	width: 100%;
+	font-weight: 300;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-transform: capitalize;
+	flex-direction: column;
+	margin-bottom: 30px;
+	color: @white;
+	text-decoration: none;
+	transition: 0.2s linear all;
+	background-color: @lightBlack;
+
+	&.logout {
+		border: 1px solid @black;
+	}
+
+	& > i.fa {
+		font-size: 50px;
+		margin-bottom: 10px;
+	}
+
+	&:not(.active):hover {
+		color: @yellow;
+	}
+	
+	&.active, &:active {
 		color: @white;
-		text-decoration: none;
-		transition: 0.2s linear all;
-		background-color: @lightBlack;
+		background-color: @darkYellow;
+	}
 
-		& > i.fa {
-			font-size: 50px;
-			margin-bottom: 10px;
-		}
-
-		&:not(.active):hover {
-    		color: @yellow;
-		}
-		
-		&.active, &:active {
-			color: @white;
-			background-color: @darkYellow;
-		}
-
-		&:last-child {
-			margin-bottom: 0;
-		}
+	&:last-child {
+		margin-bottom: 0;
 	}
 }

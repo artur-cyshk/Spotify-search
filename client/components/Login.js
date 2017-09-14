@@ -6,14 +6,16 @@ import '../styles/login.less';
 export default class Login extends Component {
 
     componentDidMount() {
-        const { match } = this.props;
+        const { match, setAuthorization } = this.props;
         const { accessToken, errorMsg } = match.params;
         if (accessToken) {
             localStorageService.setItem('accessToken', accessToken);
+            setAuthorization(true);
             historyService.getHistory().push('/search');
         }
         if (errorMsg) {
             localStorageService.removeItem('accessToken');
+            setAuthorization(false);
         }
     }
 
@@ -36,6 +38,7 @@ Login.propTypes = {
         params: PropTypes.shape({
             accessToken: PropTypes.string,
             errorMsg: PropTypes.string
-        })
+        }),
+        setAuthorization: PropTypes.func
     })
 }

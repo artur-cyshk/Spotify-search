@@ -1,16 +1,16 @@
-import * as actionTypes from '../types';
+import { GET_CURRENT_PLAYING_TRACK, GET_CURRENT_PLAYING_TRACK_READY, GET_CURRENT_PLAYING_TRACK_FAILURE } from '../types';
 import { SPOTIFY_METHODS } from '../../constants';
 
-export const trackReady = (res, err) => {
+const trackReady = (res, err) => {
   return {
-    type: res ? actionTypes.GET_CURRENT_PLAYING_TRACK_READY : actionTypes.GET_CURRENT_PLAYING_TRACK_FAILURE,
+    type: res ? GET_CURRENT_PLAYING_TRACK_READY : GET_CURRENT_PLAYING_TRACK_FAILURE,
     payload: res || err
   };
 }
 
 export const getCurrentPlayingTrack = () => {
   return { 
-    type: actionTypes.GET_CURRENT_PLAYING_TRACK,
+    type: GET_CURRENT_PLAYING_TRACK,
     onSuccess: (res, dispatch) => dispatch(trackReady(res, null)),
     onFailure: (res, dispatch) => dispatch(trackReady(null, res)),
     spotifyData: {

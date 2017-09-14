@@ -1,5 +1,6 @@
 import Spotify from 'spotify-web-api-js';
-import { localStorageService } from '../services';
+import { UNAUTHORIZED_STATUS } from '../constants';
+import { localStorageService, historyService } from '../services';
 
 const spotifyApi = new Spotify();
 
@@ -16,6 +17,9 @@ export default function ({ dispatch }) {
                 .then(res => {
                     if (action.onSuccess) action.onSuccess(res, dispatch);
                 }).catch(err => {
+                    if(err.status === UNAUTHORIZED_STATUS) {
+                        historyService.getHistory().push(`/error/There was an error. Sign in, please.`);
+                    }
                     if(action.onFailure && err.responseText) {
                         action.onFailure(JSON.parse(err.responseText), dispatch);
                     }
