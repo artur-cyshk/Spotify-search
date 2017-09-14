@@ -41,7 +41,7 @@ class Search extends Component {
 							Put something to start searching
 						</span>
 						<span className="total-info">
-							{tracks.total !== undefined ? `${tracks.total} tracks were found` : ''}
+							{tracks.total !== undefined ? `${tracks.total} ${tracks.total === 1 ? 'track was' : 'tracks were'} found` : ''}
 						</span>
 					</div>
 					<ul className="tracks-list">
