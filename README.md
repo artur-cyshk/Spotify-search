@@ -9,5 +9,5 @@ __* To start this project__:
   
 __One page preview__:
 
-![preview](https://raw.githubusercontent.com/ogrefifas/Spotify-search/master/public/preview.jpg)
+![preview](https://raw.githubusercontent.com/ogrefifas/Spotify-search/master/public/preview.png)
 
