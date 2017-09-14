@@ -6,7 +6,7 @@ export default connect(
 	(store) => ({tracks: store.tracks}),
 	(dispatch) => { 
 		return {
-			searchTracks: (searchValue) => dispatch(searchTracks(searchValue.target.value)),
+			searchTracks: (searchValue) => dispatch(searchTracks(searchValue)),
 			clearTracksList: () => dispatch(clearTracksList())
 		}
 	}

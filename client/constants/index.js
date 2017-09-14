@@ -1,5 +1,6 @@
 export const APPLICATION_TITLE = 'Spotify search';
 export const MUSIC_LIST_LIMIT = 10;
+export const SEARCH_DEBOUNCE_IN_MS = 500;
 export const SPOTIFY_METHODS = {
 	searchTracks: 'searchTracks',
 	getMyCurrentPlayingTrack: 'getMyCurrentPlayingTrack'
