@@ -18,7 +18,7 @@ const app = express();
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
 
-app.set('port', port);
+app.set('port', process.env.PORT || port);
 app.use(logger('dev'))
   .use(cookieParser())
   .use(bodyParser.json())
