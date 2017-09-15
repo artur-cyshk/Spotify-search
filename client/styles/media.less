@@ -1,0 +1,60 @@
+@import './colors.less';
+
+@media (max-width: 768px) {
+	#root > main {
+		flex-direction: column;
+		& > .left-side-bar {
+			position: absolute;
+			height: 200px;
+			width: 100%;
+
+			& > div.logo {
+				width: 100%;
+				height: auto;
+				padding: 5px;
+				flex-direction: row;
+				margin-bottom: 10px;
+
+				& > i {
+					margin: 0;
+					margin-right: 10px;
+				}
+			}
+
+			& > .app-navigation {
+				flex-direction: row;
+				height: 200px;
+				
+				& > .title {
+					display: none;
+				}
+
+				& > a {
+					margin: 0;
+					margin-right: 15px;
+					height: 100%;
+
+					&:last-child {
+						margin-right: 0;
+					}
+
+					& > div {
+						display: none;
+					}
+				}
+			}
+		}
+
+		& > div.content {
+			top: 200px;
+			left: 0;
+			margin: 0;
+		}
+
+		.track-info {
+			display: block;
+		    width: 100%;
+		    text-align: center;
+		}
+  	}
+}
