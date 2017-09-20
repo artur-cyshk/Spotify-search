@@ -9,7 +9,7 @@ const router = new express.Router();
 
 const CLIENT_ID = config.spotifyData.CLIENT_ID;
 const CLIENT_SECRET = config.spotifyData.CLIENT_SECRET;
-const REDIRECT_URI = config.spotifyData.REDIRECT_URI;
+const REDIRECT_URI = config.spotifyData.server[process.env.NODE_ENV] + config.spotifyData.REDIRECT_URI;
 const STATE_KEY = 'spotify_auth_state';
 
 const scopes = ['user-read-private', 'user-read-email', 'user-read-currently-playing', 'user-read-playback-state'];
