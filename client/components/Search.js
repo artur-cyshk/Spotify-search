@@ -30,7 +30,7 @@ class Search extends Component {
 	}
 
 	loadMoreTracks(ev) {
-		if (this.props.tracks.total <= this.props.tracks.list.length) { 
+		if (this.props.tracks.total <= this.props.tracks.list.length || !this.state.searchValue) { 
 			return;
 		};
 		const { scrollHeight, offsetHeight, scrollTop } = ev.target.body || ev.target;
