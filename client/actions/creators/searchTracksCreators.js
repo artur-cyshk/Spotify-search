@@ -8,14 +8,19 @@ const tracksReady = (res, err) => {
   };
 }
 
-export const searchTracks = (searchValue) => {
+export const searchTracks = (searchValue, page) => {
   return { 
     type: SEARCH_TRACKS,
-    onSuccess: (res, dispatch) => dispatch(tracksReady(res, null)),
+    onSuccess: (res, dispatch) => {
+      if (page === 0) {
+        dispatch(clearTracksList());
+      }
+      dispatch(tracksReady(res, null));
+    },
     onFailure: (res, dispatch) => dispatch(tracksReady(null, res)),
     spotifyData: {
       method: SPOTIFY_METHODS.searchTracks,
-      options: [searchValue, { limit: MUSIC_LIST_LIMIT}]
+      options: [searchValue, { limit: MUSIC_LIST_LIMIT, offset: page * MUSIC_LIST_LIMIT }]
     }
   };
 }

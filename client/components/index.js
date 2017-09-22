@@ -6,8 +6,9 @@ import Track from './Track';
 import Navigate from './Navigate';
 import Spinner from './Spinner';
 import Logout from './Logout';
+import WindowScroll from './WindowScroll';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll
 }

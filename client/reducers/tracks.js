@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
 		case SEARCH_TRACKS_READY:
 			const { total, items } = action.payload.tracks;
 			return {
-				list: Object.assign([], items),
+				list: state.list.concat(items),
 				total: total,
 				loading: false,
 				error: {}
