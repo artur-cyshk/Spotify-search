@@ -6,9 +6,10 @@ import Track from './Track';
 import Navigate from './Navigate';
 import Spinner from './Spinner';
 import Logout from './Logout';
+import AudioPlayer from './AudioPlayer';
 import WindowScroll from './WindowScroll';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer
 }

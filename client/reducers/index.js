@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import tracks from './tracks';
 import auth from './auth';
 import currentPlayingTrack from './currentPlayingTrack';
+import audioPlayer from './audioPlayer';
 
 export default combineReducers({
-	tracks, currentPlayingTrack, auth
+	audioPlayer, tracks, currentPlayingTrack, auth
 });
