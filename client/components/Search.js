@@ -41,8 +41,8 @@ class Search extends Component {
 	}
 
 	render() {
-		const { tracks } = this.props;
-		const tracksList = tracks.list.map((track) => <Track key={track.id} info={track}/>);
+		const { tracks, addTrackToPlayer, removeTrackFromPlayer } = this.props;
+		const tracksList = tracks.list.map((track) => <Track addTrackToPlayer={addTrackToPlayer} removeTrackFromPlayer={removeTrackFromPlayer} key={track.id} info={track}/>);
 		return (
 			<WindowScroll onWindowScroll={this.loadMoreTracks}>
 				<div className="search-wrapper">
@@ -78,7 +78,9 @@ Search.propTypes = {
     	total: PropTypes.number,
     	error: PropTypes.object
     }),
-    searchTracks: PropTypes.func
+    searchTracks: PropTypes.func,
+    addTrackToPlayer: PropTypes.func,
+    removeTrackFromPlayer: PropTypes.func
 }
 
 export default Search;
