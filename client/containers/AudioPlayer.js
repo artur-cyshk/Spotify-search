@@ -1,9 +1,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { AudioPlayer } from '../components';
-import { addTrackToPlayer, removeTrackFromPlayer } from '../actions/creators';
+import { removeTrackFromPlayer } from '../actions/creators';
 
 export default connect(
-	(store) => ({track: store.audioPlayer.track}),
-	(dispatch) => bindActionCreators({ addTrackToPlayer, removeTrackFromPlayer }, dispatch)
+	(store) => ({audioPlayer: store.audioPlayer}),
+	(dispatch) => bindActionCreators({ removeTrackFromPlayer }, dispatch)
 )(AudioPlayer);

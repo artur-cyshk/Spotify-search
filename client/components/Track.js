@@ -10,12 +10,12 @@ class Track extends Component {
 		this.removeTrackFromAudioPlayer = this.removeTrackFromAudioPlayer.bind(this);
 	}
 
-	addTrackToAudioPlayer() {
+	addTrackToAudioPlayer = () => {
 		this.props.addTrackToPlayer(this.props.info);
 	}
 
 	removeTrackFromAudioPlayer() {
-		this.props.removeTrackFromPlayer();
+		this.props.removeTrackFromPlayer(this.props.info.id);
 	}
 
 	render() {
@@ -27,8 +27,8 @@ class Track extends Component {
 			<li className="track-in-list">
 				<img src={!!images ? (images[0] || {}).url : null}/>
 				<div className="track-in-list-info">
-					<button onClick={this.addTrackToAudioPlayer}> listen preview </button>
-					<button onClick={this.removeTrackFromAudioPlayer}> stop preview </button>
+					{info.preview_url && <button onClick={this.addTrackToAudioPlayer}> listen preview </button>}
+					{info.preview_url && <button onClick={this.removeTrackFromAudioPlayer}> stop preview </button>}
 					<span title={artists}><i className="fa fa-users" aria-hidden="true"></i>{artists}</span>
 					<span title={album.name}><i className="fa fa-book" aria-hidden="true"></i>{album.name}</span>
 					<span title={info.name}><i className="fa fa-music" aria-hidden="true"></i>{info.name}</span>

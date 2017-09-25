@@ -1,35 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Track } from './';
-import ReactAudioPlayer from 'react-audio-player';
 import '../styles/audioPlayer.less';
 
 class AudioPlayer extends Component {
 
-    componentDidUpdate() {
-        if (this.player && !this.props.track.preview_url) {
-            this.player.audioEl.pause();
+    render() {
+        const noTracksInfo = {
+            src: undefined,
+            name: 'no tracks added to playlist',
+            img: './spotify.jpg'
         }
-    }
-
-   render() {
-        const info = this.props.track || {};
-        const album = info.album || {};
-        const { images } = album;
-        const artists = (info.artists || []).map((artist) => artist.name).join();
-        
+        const playerInfo = this.props.audioPlayer;
+        const playerPlaylist = playerInfo.tracks.map(track => {
+            return {
+                url: track.preview_url,
+                artist: {
+                    name: 'aaa',
+                    song: track.name
+                },
+                
+                cover: (track.album.images[0] || {}).url || './spotify.jpg'
+            }
+        });
+        console.log(playerPlaylist);
+        if (playerPlaylist.length === 0) {
+            playerPlaylist.push(noTracksInfo);
+        }
         
         return (
             <div className="audio-player">
-                <ReactAudioPlayer
-                    ref={(element) => { this.player = element; }}
-                    src={info.preview_url}
-                    autoPlay
-                    controls
-                />
+                    audioPlayer
             </div>
         );
-   } 
+    } 
 }
 
 AudioPlayer.propTypes = {

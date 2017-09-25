@@ -22,8 +22,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react'],
-          plugins: [['react-transform', {
+          presets: ['es2015', 'react', "stage-0"],
+          plugins: ['transform-class-properties', ['react-transform', {
             transforms: [{
               transform: 'react-transform-hmr',
               imports: ['react'],
