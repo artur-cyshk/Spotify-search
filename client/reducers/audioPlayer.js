@@ -1,7 +1,7 @@
 import { ADD_TRACK_TO_PLAYER, REMOVE_TRACK_FROM_PLAYER } from '../actions/types';
 
 const initialState = {
-	track: [],
+	track: {},
 };
 
 export default (state = initialState, action) => {
