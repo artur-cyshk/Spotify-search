@@ -9,6 +9,43 @@
 	display: inline-flex;
 	margin: 10px;
 
+	& > i.fa-play, i.fa-pause {
+
+		&.fa-play, &.fa-pause {
+		   	position: absolute;
+		   	top: 5px;
+		   	z-index: 1;
+		   	left: 5px;
+		   	font-size: 25px;
+		   	color: white;
+	    	background: rgba(0, 0, 0, 0.21);
+	    	box-shadow: inset 1px 0px 13px 0px #241d1d;
+		   	cursor: pointer;
+		   	padding: 5px;
+		   	width: 50px;
+		   	height: 50px;
+		   	display: flex;
+		   	justify-content: center;
+		   	align-items: center;
+		   	transition: 0.3s linear all;
+		   	border-radius: 50%;
+
+		   	&:hover {
+		   		box-shadow: inset 1px 0px 13px 0px #d7cbcb;
+		   	}
+
+		   	&:active {
+			    color: #60a095;
+			    box-shadow: #60a09b 1px 0px 13px 0px inset;
+			    background: rgba(96, 160, 126, 0.18);
+		   	}		
+		}
+
+		&.fa-play:before {
+    		margin-left: 4px;
+		}
+	}
+
 	& > img {
 		position: absolute;
 		left: 0;
@@ -24,6 +61,8 @@
 	    background: @blackWithTransparent;
 	    display: flex;
 	    flex-direction: column;
+
+
 
 	    & > span {
 	    	white-space: nowrap;

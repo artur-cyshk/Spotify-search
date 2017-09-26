@@ -1,4 +1,5 @@
 export const APPLICATION_TITLE = 'Spotify search';
+export const EMPTY_IMAGE_SRC = './spotify.jpg';
 export const MUSIC_LIST_LIMIT = 40;
 export const SEARCH_DEBOUNCE_IN_MS = 500;
 export const UNAUTHORIZED_STATUS = 401;

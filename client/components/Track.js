@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { EMPTY_IMAGE_SRC } from '../constants';
 import '../styles/track.less';
 
 class Track extends Component {
@@ -9,6 +10,7 @@ class Track extends Component {
 	}
 
 	addTrackToAudioPlayer = () => {
+		this.removeTrackFromAudioPlayer();
 		this.props.addTrackToPlayer(this.props.info);
 	}
 
@@ -24,11 +26,16 @@ class Track extends Component {
 	    const isPlayingNow = info.id === currentPlayingInPlayer.id;
 		return (
 			<li className="track-in-list">
-				<img src={!!images ? (images[0] || {}).url : null}/>
-				<div className="track-in-list-info">
-					{info.preview_url && 
-						<i className={`fa ${isPlayingNow ? 'fa-pause' : 'fa-play'}`} onClick={isPlayingNow ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}></i>
+			{info.preview_url && 
+						<i 
+							className={`fa ${isPlayingNow ? 'fa-pause' : 'fa-play'}`} 
+							onClick={isPlayingNow ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+							title={isPlayingNow ? 'Now playing' : 'Listen track preview'}
+						></i>
 					}
+				<img src={!!images ? (images[0] || {}).url : EMPTY_IMAGE_SRC}/>
+				<div className="track-in-list-info">
+					
 					<span title={artists}><i className="fa fa-users" aria-hidden="true"></i>{artists}</span>
 					<span title={album.name}><i className="fa fa-book" aria-hidden="true"></i>{album.name}</span>
 					<span title={info.name}><i className="fa fa-music" aria-hidden="true"></i>{info.name}</span>
