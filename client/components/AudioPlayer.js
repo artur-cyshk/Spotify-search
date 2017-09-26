@@ -12,25 +12,10 @@ class AudioPlayer extends Component {
             img: './spotify.jpg'
         }
         const playerInfo = this.props.audioPlayer;
-        const playerPlaylist = playerInfo.tracks.map(track => {
-            return {
-                url: track.preview_url,
-                artist: {
-                    name: 'aaa',
-                    song: track.name
-                },
-                
-                cover: (track.album.images[0] || {}).url || './spotify.jpg'
-            }
-        });
-        console.log(playerPlaylist);
-        if (playerPlaylist.length === 0) {
-            playerPlaylist.push(noTracksInfo);
-        }
-        
+
         return (
             <div className="audio-player">
-                    audioPlayer
+                   {playerInfo.track.name}
             </div>
         );
     } 

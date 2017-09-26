@@ -5,6 +5,6 @@ import { searchTracks, addTrackToPlayer, clearTracksList, removeTrackFromPlayer 
 
 
 export default connect(
-	(store) => ({tracks: store.tracks}),
+	(store) => ({tracks: store.tracks, currentPlayingInPlayer: store.audioPlayer.track}),
 	(dispatch) => bindActionCreators({ searchTracks, clearTracksList, addTrackToPlayer, removeTrackFromPlayer }, dispatch)
 )(Search);
