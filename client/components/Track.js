@@ -32,7 +32,7 @@ class Track extends Component {
 			<li className="track-in-list">
 				{info.preview_url && 
 					<i 
-						className={`fa ${isPlayingNow ? 'fa-pause' : 'fa-play'}`} 
+						className={`fa ${isPlayingNow ? 'fa-stop' : 'fa-play'}`} 
 						onClick={isPlayingNow ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
 						title={isPlayingNow ? 'Now playing' : 'Listen track preview'}
 					></i>
