@@ -6,7 +6,23 @@
     right: 0;
     display: flex;
     z-index: 10;
-    box-shadow: 2px 2px 20px 5px;
-    color: @white;
+    box-shadow: 0px 0px 0px 1px #e0e0e0;
+    color: white;
+    border-radius: 4px;
     justify-content: flex-end;
+
+    div[class^="audioElements__commentsWrapper"] {
+    	height: 300px !important;
+    }
+
+    div[class^="audioElements__mainPlayer"] {
+        position: absolute;
+    	bottom: 0;
+    	z-index: 15;
+    	background: rgba(0, 0, 0, 0.33);
+    }
+
+    div[class^="audioElements__btnStack"] button {
+    	background: transparent;
+    }
 }

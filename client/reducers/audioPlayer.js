@@ -8,11 +8,11 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_TRACK_TO_PLAYER: 
 			return {
-				track: action.payload
+				track: Object.assign({}, action.payload)
 			}
 		case REMOVE_TRACK_FROM_PLAYER: 	
 			return {
-				track: {}
+				track: Object.assign({},{})
 			};
 		default:
 			return state;	

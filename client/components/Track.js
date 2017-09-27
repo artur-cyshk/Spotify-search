@@ -11,11 +11,15 @@ class Track extends Component {
 
 	addTrackToAudioPlayer = () => {
 		this.removeTrackFromAudioPlayer();
-		this.props.addTrackToPlayer(this.props.info);
+		setTimeout(()=> this.props.addTrackToPlayer(this.props.info));
 	}
 
 	removeTrackFromAudioPlayer = () => {
-		this.props.removeTrackFromPlayer(this.props.info.id);
+		this.props.removeTrackFromPlayer();
+	}
+
+	componentWillUnmount() {
+		this.removeTrackFromAudioPlayer();
 	}
 
 	render() {
@@ -26,13 +30,13 @@ class Track extends Component {
 	    const isPlayingNow = info.id === currentPlayingInPlayer.id;
 		return (
 			<li className="track-in-list">
-			{info.preview_url && 
-						<i 
-							className={`fa ${isPlayingNow ? 'fa-pause' : 'fa-play'}`} 
-							onClick={isPlayingNow ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
-							title={isPlayingNow ? 'Now playing' : 'Listen track preview'}
-						></i>
-					}
+				{info.preview_url && 
+					<i 
+						className={`fa ${isPlayingNow ? 'fa-pause' : 'fa-play'}`} 
+						onClick={isPlayingNow ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+						title={isPlayingNow ? 'Now playing' : 'Listen track preview'}
+					></i>
+				}
 				<img src={!!images ? (images[0] || {}).url : EMPTY_IMAGE_SRC}/>
 				<div className="track-in-list-info">
 					
