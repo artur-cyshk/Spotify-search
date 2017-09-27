@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
 			}
 		case REMOVE_TRACK_FROM_PLAYER: 	
 			return {
-				track: Object.assign({},{})
+				track: {}
 			};
 		default:
 			return state;	

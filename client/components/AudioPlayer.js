@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Track } from './';
+import { AUDIO_PLAYER_SETS } from '../constants';
 import Audio from 'react-audioplayer';
 import '../styles/audioPlayer.less';
 
@@ -26,12 +27,7 @@ class AudioPlayer extends Component {
             <div className="audio-player">
                 {playlist && 
                     <Audio
-                        width={300}
-                        height={300}
-                        color="white"
-                        comment={false}
-                        autoPlay={true}
-                        fullPlayer={true}
+                        {...AUDIO_PLAYER_SETS}
                         playlist={playlist}
                         ref={(component) => this.audioComponent = component}
                     />
