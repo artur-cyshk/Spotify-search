@@ -1,4 +1,5 @@
 import Spotify from 'spotify-web-api-js';
+
 import { UNAUTHORIZED_STATUS } from '../constants';
 import { localStorageService, historyService } from '../services';
 

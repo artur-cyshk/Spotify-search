@@ -1,11 +1,13 @@
 import { searchTracks, clearTracksList } from './searchTracksCreators';
 import { addTrackToPlayer, removeTrackFromPlayer } from './audioPlayerCreators';
-import { getCurrentPlayingTrack } from './getCurrentPlayingTrackCreators';
+import { getCurrentPlayingTrack, playTrack } from './getCurrentPlayingTrackCreators';
 import { setAuthorization } from './authCreators';
+import { getDevices, removeDevices } from './devicesCreators';
 
 export {
 	addTrackToPlayer, removeTrackFromPlayer,
 	searchTracks, clearTracksList, 
-	getCurrentPlayingTrack, 
-	setAuthorization
+	getCurrentPlayingTrack, playTrack,
+	setAuthorization,
+	getDevices, removeDevices
 }

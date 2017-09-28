@@ -6,7 +6,10 @@ export const UNAUTHORIZED_STATUS = 401;
 
 export const SPOTIFY_METHODS = {
 	searchTracks: 'searchTracks',
-	getMyCurrentPlayingTrack: 'getMyCurrentPlayingTrack'
+	getMyCurrentPlayingTrack: 'getMyCurrentPlayingTrack',
+	skipToNext: 'skipToNext',
+	skipToPrevious: 'skipToPrevious',
+	getMyDevices: 'getMyDevices'
 };
 
 export const AUDIO_PLAYER_SETS = {

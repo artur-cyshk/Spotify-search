@@ -6,7 +6,21 @@ import '../styles/currentPlaying.less';
 export default class CurrentPlayingTrack extends Component {
 
     componentDidMount() {
+        this.props.getDevices();
     	this.props.getCurrentPlayingTrack();
+    }
+
+    componentWillUnmount() {
+        this.props.removeDevices();
+    }
+
+    nextTrack = () => {
+        console.log(this.props);
+        this.props.playTrack({device_id: this.props.devices.list.devices[0].id}, true);
+    }
+
+    prevTrack = () => {
+        this.props.playTrack({device_id: this.props.devices.list.devices[0].id});
     }
 
     render() {
@@ -18,6 +32,7 @@ export default class CurrentPlayingTrack extends Component {
             <div className="current-playing">
                 <header>Now playing {loading && <Spinner/>}</header>
                 <div hidden={loading}>
+                    <button onClick={this.prevTrack}>prev track</button>
                     <span className="warning" hidden={!!track.name}>
                         { error.message ? error.message : 'There are no playing tracks' }
                     </span>
@@ -40,6 +55,7 @@ export default class CurrentPlayingTrack extends Component {
                             </span>
                         </div>
                     </div>
+                    <button onClick={this.nextTrack}>next track</button>
                 </div>
 
             </div>
@@ -49,5 +65,6 @@ export default class CurrentPlayingTrack extends Component {
 
 CurrentPlayingTrack.propTypes = {
     getCurrentPlayingTrack: PropTypes.func,
-    currentPlayingTrack: PropTypes.object
+    currentPlayingTrack: PropTypes.object,
+    playTrack: PropTypes.func
 }
