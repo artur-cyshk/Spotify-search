@@ -13,11 +13,14 @@ class Root extends Component {
 	componentDidMount() {
 		const isAuthorized = !!localStorageService.getItem('accessToken');
 		this.props.setAuthorization(isAuthorized);
+		if (isAuthorized) {
+			this.props.getMe();
+		}
 	}
 
     render() {
     	const history = historyService.getHistory();
-    	const { isAuthorized, setAuthorization } = this.props;
+    	const { isAuthorized, setAuthorization, getMe } = this.props;
     	return (
 		    <Router history={history}>
 		    	<main>
@@ -34,7 +37,7 @@ class Root extends Component {
 			    			{isAuthorized === true && <Redirect to="/search"/>}	
 
 			    			{isAuthorized === false && <Route path="/login" component={Login} />}
-			    			{isAuthorized === false && <Route path="/success/:accessToken"  render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />}
+			    			{isAuthorized === false && <Route path="/success/:accessToken"  render={({match}) => <Login match={match} getMe={getMe} setAuthorization={setAuthorization}/>} />}
 			    			{isAuthorized === false && <Redirect to="/login"/>}
  		    			</Switch>
 			    	</div>

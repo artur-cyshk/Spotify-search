@@ -14,7 +14,7 @@ const trackReady = (res, err) => {
 export const playTrack = (options, next) => {
   return { 
     type: next ? PLAY_NEXT_TRACK : PLAY_PREV_TRACK,
-    onSuccess: (res, dispatch) => dispatch(trackReady(res, null)),
+    onSuccess: (res, dispatch) => setTimeout(()=> dispatch(getCurrentPlayingTrack()), 1500),
     onFailure: (res, dispatch) => dispatch(trackReady(null, res)),
     spotifyData: {
       method: next ? SPOTIFY_METHODS.skipToNext : SPOTIFY_METHODS.skipToPrevious,

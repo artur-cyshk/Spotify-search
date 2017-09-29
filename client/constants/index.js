@@ -9,8 +9,17 @@ export const SPOTIFY_METHODS = {
 	getMyCurrentPlayingTrack: 'getMyCurrentPlayingTrack',
 	skipToNext: 'skipToNext',
 	skipToPrevious: 'skipToPrevious',
-	getMyDevices: 'getMyDevices'
+	getMyDevices: 'getMyDevices',
+	getMe: 'getMe'
 };
+
+export const COMMON_DATA = {
+	premiumAccount: 'premium',
+	deviceTypes: {
+		pc: 'Computer',
+		mobile: 'Smartphone'
+	}
+}
 
 export const AUDIO_PLAYER_SETS = {
 	width: 300,

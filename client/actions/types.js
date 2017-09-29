@@ -19,3 +19,7 @@ export const GET_DEVICES = 'GET_DEVICES';
 export const REMOVE_DEVICES = 'REMOVE_DEVICES';
 export const GET_DEVICES_READY = 'GET_DEVICES_READY';
 export const GET_DEVICES_FAILURE = 'GET_DEVICES_FAILURE';
+
+export const GET_ME = 'GET_ME';
+export const GET_ME_READY = 'GET_ME_READY';
+export const GET_ME_FAILURE = 'GET_ME_FAILURE';

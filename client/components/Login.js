@@ -12,6 +12,7 @@ export default class Login extends Component {
             localStorageService.setItem('accessToken', accessToken);
             setAuthorization(true);
             historyService.getHistory().push('/search');
+            this.props.getMe();
         }
         if (errorMsg) {
             localStorageService.removeItem('accessToken');

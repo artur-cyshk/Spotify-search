@@ -57,10 +57,48 @@
 			width: 100%;
 		}
 
-		.track-info {
-			display: block;
-		    width: 100%;
-		    text-align: center;
+		.player-control {
+			height: auto;
+			min-width: 0;
+			max-width: 340px;
+			height: 500px;
+			flex-direction: column;
+			width: 100%;
+			min-height: 0;
+
+			.load-track {
+				height: 55px;
+				width: 100%;
+				border-radius: 0;
+
+				& > i {
+					transform: rotate(90deg);
+				}
+
+				&.load-prev-track {
+					border-top-left-radius: 5px;
+					border-top-right-radius: 5px;
+				}
+
+				&.load-next-track {
+					border-bottom-left-radius: 5px;
+					border-bottom-right-radius: 5px;
+				}
+			}
+			.track-info-wrapper {
+				height: 100%;
+			}
+			.track-info {
+				display: block;
+				height: 100%;
+			    width: 100%;
+			    text-align: center;
+
+			    & > .song-info > span {
+			    	margin-bottom: 15px;
+			    }
+			}
 		}
+
   	}
 }

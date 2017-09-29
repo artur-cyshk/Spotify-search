@@ -1,4 +1,7 @@
-import { GET_CURRENT_PLAYING_TRACK, GET_CURRENT_PLAYING_TRACK_READY, GET_CURRENT_PLAYING_TRACK_FAILURE } from '../actions/types';
+import {
+	GET_CURRENT_PLAYING_TRACK, GET_CURRENT_PLAYING_TRACK_READY, GET_CURRENT_PLAYING_TRACK_FAILURE, 
+	PLAY_NEXT_TRACK, PLAY_PREV_TRACK 
+} from '../actions/types';
 
 const initialState = {
 	track: {},
@@ -7,17 +10,29 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
+		case PLAY_NEXT_TRACK: 
+			return {
+				...state,
+				loadingNextTrack: true
+			};
+		case PLAY_PREV_TRACK: 
+			return {
+				...state,
+				loadingPrevTrack: true
+			};
 		case GET_CURRENT_PLAYING_TRACK: 
 			return {
-				loading: true,
+				loadingCurrentPlayingTrack: true,
+				loadingNextTrack: false,
+				loadingPrevTrack: false,
 				error: {},
-				track: Object.assign({}, state.track)
+				track: {}
 			};
 		case GET_CURRENT_PLAYING_TRACK_READY:
 			const { item } = action.payload || {};
 			return {
 				track: Object.assign({}, item),
-				loading: false,
+				loadingCurrentPlayingTrack: false,
 				error: {}
 			};
 		case GET_CURRENT_PLAYING_TRACK_FAILURE: 
@@ -25,7 +40,7 @@ export default (state = initialState, action) => {
 			return {
 				track: {},
 				error: error || {},
-				loading: false
+				loadingCurrentPlayingTrack: false
 			};
 		default:
 			return state;	

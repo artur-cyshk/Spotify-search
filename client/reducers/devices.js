@@ -15,9 +15,10 @@ export default (state = initialState, action) => {
 				error: {}
 			};
 		case GET_DEVICES_READY: 
+			const { devices } = action.payload;
 			return {
 				loading: false,
-				list: action.payload,
+				list: devices || [],
 				error: {}
 			};
 		case GET_DEVICES_FAILURE: 
