@@ -82,11 +82,31 @@
 			overflow: hidden;
 
 			& > .active-device-type {
+				display: flex;
 				position: absolute;
 				left: 15px;
 				top: 15px;
+				color: @darkYellow;
 				font-size: 40px;
 				font-weight: 200;
+			}
+
+			& > .fa-refresh {
+			    position: absolute;
+			    right: 15px;
+			    top: 15px;
+			    font-size: 25px;
+			    color: #eeeeee;
+			    cursor: pointer;
+			    transition: 0.3s linear all;
+
+			    &:hover {
+			    	color: @yellow;
+			    }
+
+			    &:active, &:focus {
+			    	color: @darkYellow;
+			    }
 			}
 
 			& > .track-info {
