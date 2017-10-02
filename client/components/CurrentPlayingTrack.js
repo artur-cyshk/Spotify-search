@@ -6,12 +6,22 @@ import '../styles/currentPlaying.less';
 
 export default class CurrentPlayingTrack extends Component {
 
+    addTrackToAudioPlayer = () => {
+        this.removeTrackFromAudioPlayer();
+        setTimeout(()=> this.props.addTrackToPlayer(this.props.currentPlayingTrack.track));
+    }
+
+    removeTrackFromAudioPlayer = () => {
+        this.props.removeTrackFromPlayer();
+    }
+
     componentDidMount() {
         this.loadCurrentPlayingTrack();
     }
 
     componentWillUnmount() {
         this.props.removeDevices();
+        this.removeTrackFromAudioPlayer();
     }
 
     loadCurrentPlayingTrack = () => {
@@ -39,16 +49,18 @@ export default class CurrentPlayingTrack extends Component {
     }
 
     render() {
-        const { track, loadingCurrentPlayingTrack, loadingNextTrack, loadingPrevTrack, error } = this.props.currentPlayingTrack;
-        const { loading: loadingDevices, list: devicesList } = this.props.devices;
+        const { currentPlayingTrack, devices, currentPlayingInPlayer = { id: null}, auth } = this.props;
+        const { track, loadingCurrentPlayingTrack, loadingNextTrack, loadingPrevTrack, error } = currentPlayingTrack;
+        const { loading: loadingDevices, list: devicesList } = devices;
         const album = track.album || {};
         const { images } = album;
         const artists = (track.artists || []).map((artist) => artist.name).join();
-        const { product } = this.props.auth.user;
+        const { product } = auth.user;
         const isPremium = product === COMMON_DATA.premiumAccount;
+        const nowPlayedInLocalPlayer = track.id === currentPlayingInPlayer.id;
         this.activeDevice = devicesList.find(device => device.is_active) || {};
         const deviceIconClass = this.getDeviceIcon(this.activeDevice.type);
-        
+                
         return (
             <div className="current-playing">
                 <div className="player-control">
@@ -59,7 +71,16 @@ export default class CurrentPlayingTrack extends Component {
                         <div className="active-device-type">
                              {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
                         </div>
-                        <i className="fa fa-refresh" onClick={this.loadCurrentPlayingTrack}/>
+                        <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
+                            <i className="fa fa-refresh"/>
+                        </button>
+                        
+                        <button title="listen track preview" className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} disabled={!track.preview_url} onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}>
+                            <i className="fa fa-music"/>
+                        </button>
+                        
+
+
                         {loadingCurrentPlayingTrack ? <Spinner/> :
                             track.name ?
                             <div className="track-info">
@@ -98,8 +119,11 @@ export default class CurrentPlayingTrack extends Component {
 CurrentPlayingTrack.propTypes = {
     getCurrentPlayingTrack: PropTypes.func,
     currentPlayingTrack: PropTypes.object,
+    currentPlayingInPlayer: PropTypes.object,
     devices: PropTypes.object,
     getDevices: PropTypes.func,
     removeDevices: PropTypes.func,
-    playTrack: PropTypes.func
+    playTrack: PropTypes.func,
+    addTrackToPlayer: PropTypes.func,
+    removeTrackFromPlayer: PropTypes.func
 }

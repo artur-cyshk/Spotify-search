@@ -22,7 +22,7 @@ class AudioPlayer extends Component {
                 name: playerInfo.track.name,
                 img: ((playerInfo.track.album || {}).images || [{}])[0].url
             }
-        ]
+        ];
         return (
             <div className="audio-player">
                 {playlist && 
