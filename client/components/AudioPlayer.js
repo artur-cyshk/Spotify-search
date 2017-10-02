@@ -38,10 +38,12 @@ class AudioPlayer extends Component {
 }
 
 AudioPlayer.propTypes = {
-    track: PropTypes.shape({
-        album: PropTypes.object,
-        artists: PropTypes.arrayOf(PropTypes.object),
-        name: PropTypes.string
+    audioPlayer: PropTypes.shape({
+        track: PropTypes.shape({
+            album: PropTypes.object,
+            artists: PropTypes.arrayOf(PropTypes.object),
+            name: PropTypes.string
+        })        
     })
 };
 

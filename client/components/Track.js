@@ -5,10 +5,6 @@ import '../styles/track.less';
 
 class Track extends Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	addTrackToAudioPlayer = () => {
 		this.removeTrackFromAudioPlayer();
 		setTimeout(()=> this.props.addTrackToPlayer(this.props.info));
@@ -56,7 +52,8 @@ Track.propTypes = {
     	name: PropTypes.string
     }),
     addTrackToPlayer: PropTypes.func,
-    removeTrackFromPlayer: PropTypes.func
+    removeTrackFromPlayer: PropTypes.func,
+    currentPlayingInPlayer: PropTypes.object
 };
 
 export default Track;

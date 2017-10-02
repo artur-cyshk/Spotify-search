@@ -24,11 +24,8 @@ export default class Login extends Component {
         const { errorMsg } = this.props.match.params;
         return (
             <div className="login">
-                <header>Sign In</header>
-                <div>
-                    <a href="/login">sign in using spotify</a>
-                    <span className="error">{errorMsg}</span>
-                </div>
+                <a href="/login">sign in using spotify</a>
+                <span className="error">{errorMsg}</span>
             </div>
         );
     }
@@ -41,5 +38,7 @@ Login.propTypes = {
             errorMsg: PropTypes.string
         }),
         setAuthorization: PropTypes.func
-    })
+    }),
+    getMe: PropTypes.func,
+    setAuthorization: PropTypes.func
 }

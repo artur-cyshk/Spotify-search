@@ -8,8 +8,9 @@ import Spinner from './Spinner';
 import Logout from './Logout';
 import AudioPlayer from './AudioPlayer';
 import WindowScroll from './WindowScroll';
+import Header from './Header';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer, Header
 }

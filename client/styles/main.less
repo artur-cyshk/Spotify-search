@@ -44,6 +44,8 @@ ul {
 
 		& > .content {
 		    padding: 15px;
+		    display: flex;
+		    flex-direction: column;
 		    margin-left: 30px;
 		    left: 200px;
 		    right: 0;
@@ -62,6 +64,10 @@ ul {
 				font-weight: 200;
 				position: relative;
 				color: @white;
+
+				& + div {
+					flex: 1;
+				}
 			}
 		}
 	}

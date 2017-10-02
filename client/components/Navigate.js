@@ -5,6 +5,7 @@ import { Logout } from './';
 import '../styles/navigate.less';
 
 const Navigate = ({isAuthorized, routes, setAuthorization}) => {
+	
 	const routesList = routes.filter(route => route.isAuthorized === isAuthorized).map(route => {
 		return (
 			<NavLink className="nav-button" to={route.path} activeClassName="active" key={route.name}>
@@ -13,6 +14,7 @@ const Navigate = ({isAuthorized, routes, setAuthorization}) => {
 			</NavLink>
 		);
 	});
+
 	return (
 		<nav className="app-navigation">
 			<div className="title">

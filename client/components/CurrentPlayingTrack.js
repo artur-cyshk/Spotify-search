@@ -51,48 +51,44 @@ export default class CurrentPlayingTrack extends Component {
         
         return (
             <div className="current-playing">
-                <header>Now playing </header>
-                <div>
-                    <div className="player-control">
-                        {isPremium && <button disabled={loadingPrevTrack || !this.activeDevice.type} className="load-track load-prev-track" onClick={this.prevTrack}>
-                            {loadingPrevTrack && <Spinner/> || <i className="fa fa-step-backward"></i>}
-                        </button>}
-                        <div className="track-info-wrapper">
-                            <div className="active-device-type">
-                                 {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
-                            </div>
-                            <i className="fa fa-refresh" onClick={this.loadCurrentPlayingTrack}/>
-                            {loadingCurrentPlayingTrack ? <Spinner/> :
-                                track.name ?
-                                <div className="track-info">
-                                    <div className="album-image">
-                                        <img src={!!images ? images[0].url : null}/>
-                                    </div>
-                                    <div className="song-info">
-                                        <span>
-                                            <i className="fa fa-book" aria-hidden="true"></i>
-                                            {album.name}
-                                        </span>
-                                        <span>
-                                            <i className="fa fa-users" aria-hidden="true"></i>
-                                            {artists}
-                                        </span>
-                                        <span>
-                                           <i className="fa fa-music" aria-hidden="true"></i>
-                                           {track.name}
-                                        </span>
-                                    </div>
-                                </div> :
-                                <span className="warning">
-                                    { error.message ? error.message : 'There are no playing tracks' }
-                                </span>
-                            }
+                <div className="player-control">
+                    {isPremium && <button disabled={loadingPrevTrack || !this.activeDevice.type} className="load-track load-prev-track" onClick={this.prevTrack}>
+                        {loadingPrevTrack && <Spinner/> || <i className="fa fa-step-backward"></i>}
+                    </button>}
+                    <div className="track-info-wrapper">
+                        <div className="active-device-type">
+                             {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
                         </div>
-                        {isPremium && <button disabled={loadingNextTrack || !this.activeDevice.type} className="load-track load-next-track" onClick={this.nextTrack}>
-                            {loadingNextTrack ? <Spinner/> : <i className="fa fa-step-forward"></i>}
-                        </button>}
+                        <i className="fa fa-refresh" onClick={this.loadCurrentPlayingTrack}/>
+                        {loadingCurrentPlayingTrack ? <Spinner/> :
+                            track.name ?
+                            <div className="track-info">
+                                <div className="album-image">
+                                    <img src={!!images ? images[0].url : null}/>
+                                </div>
+                                <div className="song-info">
+                                    <span>
+                                        <i className="fa fa-book" aria-hidden="true"></i>
+                                        {album.name}
+                                    </span>
+                                    <span>
+                                        <i className="fa fa-users" aria-hidden="true"></i>
+                                        {artists}
+                                    </span>
+                                    <span>
+                                       <i className="fa fa-music" aria-hidden="true"></i>
+                                       {track.name}
+                                    </span>
+                                </div>
+                            </div> :
+                            <span className="warning">
+                                { error.message ? error.message : 'There are no playing tracks' }
+                            </span>
+                        }
                     </div>
-
+                    {isPremium && <button disabled={loadingNextTrack || !this.activeDevice.type} className="load-track load-next-track" onClick={this.nextTrack}>
+                        {loadingNextTrack ? <Spinner/> : <i className="fa fa-step-forward"></i>}
+                    </button>}
                 </div>
             </div>
         );
@@ -102,5 +98,8 @@ export default class CurrentPlayingTrack extends Component {
 CurrentPlayingTrack.propTypes = {
     getCurrentPlayingTrack: PropTypes.func,
     currentPlayingTrack: PropTypes.object,
+    devices: PropTypes.object,
+    getDevices: PropTypes.func,
+    removeDevices: PropTypes.func,
     playTrack: PropTypes.func
 }

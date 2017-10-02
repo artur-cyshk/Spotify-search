@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 
 class WindowScroll extends Component {
 
-	constructor(props) {
-		super(props);
-		this.handleScroll = this.handleScroll.bind(this);
-	}
-
-	handleScroll(event) {
+	handleScroll = (event) => {
 		if (this.props.onWindowScroll) {
 			this.props.onWindowScroll(event);
 		}
