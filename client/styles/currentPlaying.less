@@ -58,6 +58,12 @@
 		    	background: #6f716b;
 		    }
 
+		    &:disabled {
+		    	cursor: default;
+		    	box-shadow: none;
+		    	color: @grey;
+		    }
+
 		    &.load-prev-track {
 		    	border-top-left-radius: 5px;
 		    	border-bottom-left-radius: 5px;
@@ -95,6 +101,7 @@
 			    position: absolute;
 			    right: 15px;
 			    top: 15px;
+			    z-index: 2;
 			    font-size: 25px;
 			    color: #eeeeee;
 			    cursor: pointer;

@@ -54,7 +54,7 @@ export default class CurrentPlayingTrack extends Component {
                 <header>Now playing </header>
                 <div>
                     <div className="player-control">
-                        {isPremium && <button disabled={loadingPrevTrack} className="load-track load-prev-track" onClick={this.prevTrack}>
+                        {isPremium && <button disabled={loadingPrevTrack || !this.activeDevice.type} className="load-track load-prev-track" onClick={this.prevTrack}>
                             {loadingPrevTrack && <Spinner/> || <i className="fa fa-step-backward"></i>}
                         </button>}
                         <div className="track-info-wrapper">
@@ -88,7 +88,7 @@ export default class CurrentPlayingTrack extends Component {
                                 </span>
                             }
                         </div>
-                        {isPremium && <button disabled={loadingNextTrack} className="load-track load-next-track" onClick={this.nextTrack}>
+                        {isPremium && <button disabled={loadingNextTrack || !this.activeDevice.type} className="load-track load-next-track" onClick={this.nextTrack}>
                             {loadingNextTrack ? <Spinner/> : <i className="fa fa-step-forward"></i>}
                         </button>}
                     </div>
