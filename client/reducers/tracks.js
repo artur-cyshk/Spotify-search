@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
 				error: {}
 			};
 		case SEARCH_TRACKS_FAILURE: 
-			const { error } = action.payload;
+			const { error } = action.payload || {};
 			return {
 				list: [],
 				error: error,

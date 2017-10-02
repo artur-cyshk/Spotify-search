@@ -15,18 +15,18 @@ export default (state = initialState, action) => {
 				error: {}
 			};
 		case GET_DEVICES_READY: 
-			const { devices } = action.payload;
+			const { devices } = action.payload || {};
 			return {
 				loading: false,
 				list: devices || [],
 				error: {}
 			};
 		case GET_DEVICES_FAILURE: 
-			const { error } = action.payload;
+			const { error } = action.payload || {};
 			return {
 				loading: false,
 				list: [],
-				error: error
+				error: error || {}
 			};	
 		case REMOVE_DEVICES: 	
 			return {
