@@ -9,8 +9,9 @@ import Logout from './Logout';
 import AudioPlayer from './AudioPlayer';
 import WindowScroll from './WindowScroll';
 import Header from './Header';
+import Profile from './Profile';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer, Header
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer, Header, Profile
 }

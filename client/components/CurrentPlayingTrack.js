@@ -25,16 +25,19 @@ export default class CurrentPlayingTrack extends Component {
     }
 
     loadCurrentPlayingTrack = () => {
+        this.removeTrackFromAudioPlayer();
         this.props.getDevices();
         this.props.getCurrentPlayingTrack();
     }
 
     nextTrack = () => {
         this.props.playTrack({device_id: this.activeDevice.id}, true);
+        this.removeTrackFromAudioPlayer();
     }
 
     prevTrack = () => {
         this.props.playTrack({device_id: this.activeDevice.id});
+        this.removeTrackFromAudioPlayer();
     }
 
     getDeviceIcon = (deviceType) => {
@@ -49,7 +52,7 @@ export default class CurrentPlayingTrack extends Component {
     }
 
     render() {
-        const { currentPlayingTrack, devices, currentPlayingInPlayer = { id: null}, auth } = this.props;
+        const { currentPlayingTrack, devices, currentPlayingInPlayer = {}, auth } = this.props;
         const { track, loadingCurrentPlayingTrack, loadingNextTrack, loadingPrevTrack, error } = currentPlayingTrack;
         const { loading: loadingDevices, list: devicesList } = devices;
         const album = track.album || {};
@@ -57,7 +60,7 @@ export default class CurrentPlayingTrack extends Component {
         const artists = (track.artists || []).map((artist) => artist.name).join();
         const { product } = auth.user;
         const isPremium = product === COMMON_DATA.premiumAccount;
-        const nowPlayedInLocalPlayer = track.id === currentPlayingInPlayer.id;
+        const nowPlayedInLocalPlayer = track.id && track.id === currentPlayingInPlayer.id;
         this.activeDevice = devicesList.find(device => device.is_active) || {};
         const deviceIconClass = this.getDeviceIcon(this.activeDevice.type);
                 
@@ -75,7 +78,12 @@ export default class CurrentPlayingTrack extends Component {
                             <i className="fa fa-refresh"/>
                         </button>
                         
-                        <button title="listen track preview" className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} disabled={!track.preview_url} onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}>
+                        <button 
+                            title="listen track preview"
+                            className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
+                            disabled={!track.preview_url} 
+                            onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+                        >
                             <i className="fa fa-music"/>
                         </button>
                         

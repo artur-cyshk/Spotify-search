@@ -20,8 +20,8 @@ class Root extends Component {
 
     render() {
     	const history = historyService.getHistory();
-    	const { isAuthorized, setAuthorization, getMe } = this.props;
-
+    	const { setAuthorization, getMe, auth } = this.props;
+    	const { isAuthorized } = auth;
     	return (
 		    <Router history={history}>
 		    	<main>
@@ -31,7 +31,7 @@ class Root extends Component {
 		    			<Navigate isAuthorized={isAuthorized} setAuthorization={setAuthorization} routes={ROUTES_LINKS}/>
 			    	</div>
 			    	<div className="content">
-			    		<Header route="Test route"></Header>
+			    		<Header auth={auth} route="Test route"></Header>
 			    		<Switch>
 				    		<Route path="/error/:errorMsg" render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />  
 			    			{isAuthorized === true && <Route path="/search" component={Search} />}
@@ -50,7 +50,7 @@ class Root extends Component {
 }
 
 Root.propTypes = {
-    isAuthorized: PropTypes.bool,
+    auth: PropTypes.object,
     setAuthorization: PropTypes.func,
     getMe: PropTypes.func
 };
