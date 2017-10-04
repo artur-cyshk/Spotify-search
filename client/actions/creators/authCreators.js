@@ -6,7 +6,7 @@ const meReady = (res, err) => {
     type: res ? GET_ME_READY : GET_ME_FAILURE,
     payload: res || err
   };
-}
+};
 
 export const getMe = () => {
   return { 
@@ -17,6 +17,8 @@ export const getMe = () => {
       method: SPOTIFY_METHODS.getMe
     }
   };
-}
+};
+
+export const refreshAccess = (refreshToken) => ({ type: SET_AUTHORIZATION, payload: isAuthorized });
 
 export const setAuthorization = (isAuthorized) => ({ type: SET_AUTHORIZATION, payload: isAuthorized });

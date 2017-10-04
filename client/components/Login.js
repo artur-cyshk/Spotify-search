@@ -7,9 +7,10 @@ export default class Login extends Component {
 
     componentDidMount() {
         const { match, setAuthorization } = this.props;
-        const { accessToken, errorMsg } = match.params;
-        if (accessToken) {
+        const { accessToken, refreshToken, errorMsg } = match.params;
+        if (accessToken && refreshToken) {
             localStorageService.setItem('accessToken', accessToken);
+            localStorageService.setItem('refreshToken', refreshToken);
             setAuthorization(true);
             historyService.getHistory().push('/search');
             this.props.getMe();

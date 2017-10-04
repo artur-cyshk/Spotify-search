@@ -22,6 +22,7 @@ class Root extends Component {
     	const history = historyService.getHistory();
     	const { setAuthorization, getMe, auth } = this.props;
     	const { isAuthorized } = auth;
+
     	return (
 		    <Router history={history}>
 		    	<main>
@@ -39,7 +40,7 @@ class Root extends Component {
 			    			{isAuthorized === true && <Redirect to="/search"/>}	
 
 			    			{isAuthorized === false && <Route path="/login" component={Login} />}
-			    			{isAuthorized === false && <Route path="/success/:accessToken"  render={({match}) => <Login match={match} getMe={getMe} setAuthorization={setAuthorization}/>} />}
+			    			{isAuthorized === false && <Route path="/success/:accessToken/:refreshToken"  render={({match}) => <Login match={match} getMe={getMe} setAuthorization={setAuthorization}/>} />}
 			    			{isAuthorized === false && <Redirect to="/login"/>}
  		    			</Switch>
 			    	</div>

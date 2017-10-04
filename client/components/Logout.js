@@ -7,6 +7,7 @@ class Logout extends Component {
 
 	logout = () => {
 		localStorageService.removeItem('accessToken');
+        localStorageService.removeItem('refreshToken');
 		this.props.setAuthorization(false);
 	}
 

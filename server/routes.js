@@ -38,9 +38,10 @@ router.get('/callback', (req, res) => {
   } else {
     res.clearCookie(STATE_KEY);
     spotifyApi.authorizationCodeGrant(code).then(data => {
-      const { expires_in, access_token } = data.body;
+      const { expires_in, access_token, refresh_token } = data.body;
       spotifyApi.setAccessToken(access_token);
-      res.redirect(`/#/success/${access_token}`);
+      spotifyApi.setRefreshToken(refresh_token);
+      res.redirect(`/#/success/${access_token}/${refresh_token}`);
     }).catch(err => {
       res.redirect('/#/error/Error while sign in, try again');
     });
