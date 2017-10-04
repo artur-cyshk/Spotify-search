@@ -10,21 +10,30 @@ import '../styles/main.less';
 
 class Root extends Component {
 
+	constructor(props) {
+		super(props);
+		const history = historyService.getHistory()
+		this.state = {
+			location: {
+				pathname: history.location.pathname
+			},
+			history: history
+		}
+	}
 	componentDidMount() {
 		const isAuthorized = !!localStorageService.getItem('accessToken');
 		this.props.setAuthorization(isAuthorized);
+		this.state.history.listen(location => this.setState({location: location}));
 		if (isAuthorized) {
 			this.props.getMe();
 		}
 	}
 
     render() {
-    	const history = historyService.getHistory();
     	const { setAuthorization, getMe, auth } = this.props;
     	const { isAuthorized } = auth;
-
     	return (
-		    <Router history={history}>
+		    <Router history={this.state.history}>
 		    	<main>
 		    		<AudioPlayer/>
 		    		<div className="left-side-bar">
@@ -32,7 +41,7 @@ class Root extends Component {
 		    			<Navigate isAuthorized={isAuthorized} setAuthorization={setAuthorization} routes={ROUTES_LINKS}/>
 			    	</div>
 			    	<div className="content">
-			    		<Header auth={auth} route="Test route"></Header>
+			    		<Header auth={auth} route={this.state.location}></Header>
 			    		<Switch>
 				    		<Route path="/error/:errorMsg" render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />  
 			    			{isAuthorized === true && <Route path="/search" component={Search} />}

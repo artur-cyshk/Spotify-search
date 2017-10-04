@@ -18,8 +18,13 @@ export const COMMON_DATA = {
 	deviceTypes: {
 		pc: 'Computer',
 		mobile: 'Smartphone'
+	},
+	routes: {
+		'/current-playing': 'Now playing',
+		'/login': 'Login',
+		'/search': 'Search'
 	}
-}
+};
 
 export const AUDIO_PLAYER_SETS = {
 	width: 300,
