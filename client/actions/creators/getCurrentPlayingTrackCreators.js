@@ -1,6 +1,7 @@
 import { 
   GET_CURRENT_PLAYING_TRACK, GET_CURRENT_PLAYING_TRACK_READY, GET_CURRENT_PLAYING_TRACK_FAILURE,
-  PLAY_NEXT_TRACK, PLAY_PREV_TRACK 
+  PLAY_NEXT_TRACK, PLAY_PREV_TRACK,
+  CHANGE_TRACK_STATE, CHANGE_TRACK_STATE_READY, CHANGE_TRACK_STATE_FAILURE
 } from '../types';
 import { SPOTIFY_METHODS } from '../../constants';
 
@@ -9,6 +10,25 @@ const trackReady = (res, err) => {
     type: res ? GET_CURRENT_PLAYING_TRACK_READY : GET_CURRENT_PLAYING_TRACK_FAILURE,
     payload: res || err
   };
+}
+
+const changeTrackStateReady = (res, err) => {
+  return {
+    type: res ? CHANGE_TRACK_STATE_READY : CHANGE_TRACK_STATE_FAILURE,
+    payload: res || res
+  };
+}
+
+export const changeTrackState = (options, isPlayingNow) => {
+  return { 
+    type: CHANGE_TRACK_STATE,
+    onSuccess: (res, dispatch) => dispatch(changeTrackStateReady({ isPlayingNow: isPlayingNow }, null)),
+    onFailure: (res, dispatch) => dispatch(changeTrackStateReady(null, res)),
+    spotifyData: {
+      method: isPlayingNow ? SPOTIFY_METHODS.pause : SPOTIFY_METHODS.play,
+      options: [options]
+    }
+  }
 }
 
 export const playTrack = (options, next) => {

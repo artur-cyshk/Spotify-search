@@ -1,6 +1,7 @@
 import {
 	GET_CURRENT_PLAYING_TRACK, GET_CURRENT_PLAYING_TRACK_READY, GET_CURRENT_PLAYING_TRACK_FAILURE, 
-	PLAY_NEXT_TRACK, PLAY_PREV_TRACK 
+	PLAY_NEXT_TRACK, PLAY_PREV_TRACK,
+  	CHANGE_TRACK_STATE, CHANGE_TRACK_STATE_READY, CHANGE_TRACK_STATE_FAILURE
 } from '../actions/types';
 
 const initialState = {
@@ -10,6 +11,22 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
+		case CHANGE_TRACK_STATE:
+			return {
+				...state,
+				loadingTrackState: true
+			};
+		case CHANGE_TRACK_STATE_READY:
+			return {
+				...state,
+				track: Object.assign({}, {...state.track, is_playing: !action.payload.isPlayingNow}),
+				loadingTrackState: false
+			};
+		case CHANGE_TRACK_STATE_FAILURE:
+			return {
+				...state,
+				loadingTrackState: false
+			};
 		case PLAY_NEXT_TRACK: 
 			return {
 				...state,
@@ -30,6 +47,7 @@ export default (state = initialState, action) => {
 			};
 		case GET_CURRENT_PLAYING_TRACK_READY:
 			const { item } = action.payload || {};
+			item.is_playing = (action.payload || {}).is_playing || false;
 			return {
 				track: Object.assign({}, item),
 				loadingCurrentPlayingTrack: false,

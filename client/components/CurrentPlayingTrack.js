@@ -19,6 +19,10 @@ export default class CurrentPlayingTrack extends Component {
         this.loadCurrentPlayingTrack();
     }
 
+    changeTrackState = () => {
+        this.props.changeTrackState({device_id: this.activeDevice.id}, this.props.currentPlayingTrack.track.is_playing)
+    }
+
     componentWillUnmount() {
         this.props.removeDevices();
         this.removeTrackFromAudioPlayer();
@@ -53,7 +57,7 @@ export default class CurrentPlayingTrack extends Component {
 
     render() {
         const { currentPlayingTrack, devices, currentPlayingInPlayer = {}, auth } = this.props;
-        const { track, loadingCurrentPlayingTrack, loadingNextTrack, loadingPrevTrack, error } = currentPlayingTrack;
+        const { track, loadingCurrentPlayingTrack, loadingNextTrack, loadingPrevTrack, error, loadingTrackState } = currentPlayingTrack;
         const { loading: loadingDevices, list: devicesList } = devices;
         const album = track.album || {};
         const { images } = album;
@@ -77,7 +81,10 @@ export default class CurrentPlayingTrack extends Component {
                         <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
                             <i className="fa fa-refresh"/>
                         </button>
-                        
+                        <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState} onClick={this.changeTrackState}>
+                            <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
+                        </button>
+
                         <button 
                             title="listen track preview"
                             className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 

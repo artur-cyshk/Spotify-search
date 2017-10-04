@@ -10,7 +10,9 @@ export const SPOTIFY_METHODS = {
 	skipToNext: 'skipToNext',
 	skipToPrevious: 'skipToPrevious',
 	getMyDevices: 'getMyDevices',
-	getMe: 'getMe'
+	getMe: 'getMe',
+	play: 'play',
+	pause: 'pause'
 };
 
 export const COMMON_DATA = {
