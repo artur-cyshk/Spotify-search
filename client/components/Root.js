@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { historyService, localStorageService } from '../services';
 import { Logo, Login, Navigate, Header } from './';
-import { Search, CurrentPlayingTrack, AudioPlayer } from '../containers';
+import { Search, CurrentPlayingTrack, AudioPlayer, Playlists } from '../containers';
 import { APPLICATION_TITLE, ROUTES_LINKS } from '../constants';
 import '../styles/main.less';
 
@@ -38,14 +38,15 @@ class Root extends Component {
 		    		<AudioPlayer/>
 		    		<div className="left-side-bar">
 		    			<Logo name={APPLICATION_TITLE}/>
-		    			<Navigate isAuthorized={isAuthorized} setAuthorization={setAuthorization} routes={ROUTES_LINKS}/>
+		    			<Navigate isAuthorized={isAuthorized} routes={ROUTES_LINKS}/>
 			    	</div>
 			    	<div className="content">
-			    		<Header auth={auth} route={this.state.location}></Header>
+			    		<Header auth={auth} setAuthorization={setAuthorization} route={this.state.location}></Header>
 			    		<Switch>
 				    		<Route path="/error/:errorMsg" render={({match}) => <Login match={match} setAuthorization={setAuthorization}/>} />  
 			    			{isAuthorized === true && <Route path="/search" component={Search} />}
 			    			{isAuthorized === true && <Route path="/current-playing" component={CurrentPlayingTrack} />}
+			    			{isAuthorized === true && <Route path="/playlists" component={Playlists} />}
 			    			{isAuthorized === true && <Redirect to="/search"/>}	
 
 			    			{isAuthorized === false && <Route path="/login" component={Login} />}

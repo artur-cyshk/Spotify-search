@@ -1,25 +1,40 @@
+@import './colors.less';
+
 .profile {
 	width: auto;
-	overflow: hidden;
+    min-width: 150px;
 	max-width: 300px;
-	padding: 0 5px;
     display: flex;
     align-items: center;
-    background: rgb(55, 57, 58);
     text-decoration: none;
     justify-content: flex-end;
     color: white;
     transition: 0.2s linear all;
-    border: 1px solid transparent;
 
-    &:hover {
-		border-color: #9ba060;
+    & > a {
+        color: #b1b861;
+        height: 50px;
+        background: #373833;
+        border-radius: 5px;
+        min-width: 50px;
+        border: 1px solid #9ba060;
+        padding: 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        margin-right: 15px;
+        transition: 0.2s linear all;
     }
 
-    &:active {
-    	color: #9ba060;
-    	background: rgb(39, 41, 44);
-    	border-color:#9ba060;
+    & > a:hover {
+		border-color: transparent;
+        color: @darkYellow;
+    }
+
+    & > a:active {
+        border-color:#9ba060;
+    	background: transparent;
     }
 
     span {

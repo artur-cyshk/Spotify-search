@@ -4,11 +4,11 @@ import { Profile } from './';
 import { COMMON_DATA } from '../constants';
 import '../styles/header.less';
 
-const Header = ({ route, auth }) => {
+const Header = ({ route, auth, setAuthorization }) => {
 	return (
 		<header className="content-header">
 			<span>{COMMON_DATA.routes[route.pathname]}</span>	
-			{auth.isAuthorized && <Profile auth={auth}/>} 
+			{auth.isAuthorized && <Profile auth={auth} setAuthorization={setAuthorization}/>} 
 		</header>
 	);
 };

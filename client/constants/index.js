@@ -24,7 +24,8 @@ export const COMMON_DATA = {
 	routes: {
 		'/current-playing': 'Now playing',
 		'/login': 'Login',
-		'/search': 'Search'
+		'/search': 'Search',
+		'/playlists': 'My Playlists'
 	}
 };
 
@@ -55,5 +56,11 @@ export const ROUTES_LINKS = [
 		name: 'Now playing',
 		iconClass: 'fa-music',
 		isAuthorized: true
-	}
+	},
+	{
+		path: '/playlists',
+		name: 'My Playlists',
+		iconClass: 'fa-list-ol',
+		isAuthorized: true
+	},
 ];

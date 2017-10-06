@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Logout } from './';
 import '../styles/navigate.less';
 
-const Navigate = ({isAuthorized, routes, setAuthorization}) => {
+const Navigate = ({isAuthorized, routes}) => {
 	
 	const routesList = routes.filter(route => route.isAuthorized === isAuthorized).map(route => {
 		return (
@@ -21,7 +20,6 @@ const Navigate = ({isAuthorized, routes, setAuthorization}) => {
 				Navigate
 			</div>
 			{routesList}
-			{isAuthorized && <Logout setAuthorization={setAuthorization}/>}
 		</nav>
 	);
 };
@@ -33,8 +31,7 @@ Navigate.propTypes = {
     	iconClass: PropTypes.string,
     	isAuthorized: PropTypes.bool
     })),
-    isAuthorized: PropTypes.bool,
-    setAuthorization: PropTypes.func
+    isAuthorized: PropTypes.bool
 }
 
 export default Navigate;

@@ -13,9 +13,8 @@ class Logout extends Component {
 
     render() {
         return (
-            <Link to="/login" className="nav-button logout" onClick={this.logout}>
+            <Link to="/login" title="Sign out" className="profile-btn logout" onClick={this.logout}>
             	<i className="fa fa-sign-out" aria-hidden="true"></i>
-				<div>Sign Out</div>
             </Link>
         );
     }

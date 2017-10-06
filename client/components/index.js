@@ -10,8 +10,9 @@ import AudioPlayer from './AudioPlayer';
 import WindowScroll from './WindowScroll';
 import Header from './Header';
 import Profile from './Profile';
+import Playlists from './Playlists';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer, Header, Profile
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer, Header, Profile, Playlists
 }
