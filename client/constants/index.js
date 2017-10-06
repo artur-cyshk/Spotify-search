@@ -1,6 +1,7 @@
 export const APPLICATION_TITLE = 'Spotify search';
 export const EMPTY_IMAGE_SRC = './spotify.jpg';
 export const MUSIC_LIST_LIMIT = 40;
+export const PLAYLISTS_LIMIT = 10;
 export const SEARCH_DEBOUNCE_IN_MS = 500;
 export const UNAUTHORIZED_STATUS = 401;
 
@@ -12,7 +13,8 @@ export const SPOTIFY_METHODS = {
 	getMyDevices: 'getMyDevices',
 	getMe: 'getMe',
 	play: 'play',
-	pause: 'pause'
+	pause: 'pause',
+	getUserPlaylists: 'getUserPlaylists'
 };
 
 export const COMMON_DATA = {

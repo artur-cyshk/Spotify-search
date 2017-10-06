@@ -11,7 +11,6 @@ class Search extends Component {
 		super(props);
 		this.state = { searchValue: '', currentPage: 0 };
 		this.searchWithDebounce = debounce(SEARCH_DEBOUNCE_IN_MS, this.searchWithDebounce);
-		
 	}
 
 	componentWillUnmount() {
