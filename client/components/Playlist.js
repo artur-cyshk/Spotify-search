@@ -5,32 +5,36 @@ import '../styles/playlist.less';
 
 class Playlist extends Component {
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			infoExpanded: false
-		};
-	}
-
 	toggleInfoBlock = () => {
-		this.setState({
-			infoExpanded: !this.state.infoExpanded
-		})
+		const { playlist = {tracks: {}}, expanded, expandPlaylist } = this.props;
+		const { total } = playlist.tracks;
+		if (total > 0) {
+			expandPlaylist(expanded ? false : playlist.id);
+		}
 	}
 
 	render() {
-		const { playlist } = this.props;
+		const { expanded, playlist = {}, getPlaylistTracks, currentPlaylistTracks, clearPlaylistTracks } = this.props;
+		const { total } = playlist.tracks || {};
 		return (
-			<li className={`${this.state.infoExpanded ? 'expanded' : ''} playlist`}>
-				<span className="title" onClick={this.toggleInfoBlock}>{playlist.name}</span>
-				{this.state.infoExpanded && <PlaylistInfo info={playlist}/>}
+			<li className={`${expanded ? 'expanded' : ''} ${!total ? 'empty' : ''} playlist`}>
+				<span title={playlist.name} className="title" onClick={this.toggleInfoBlock}>
+					{playlist.name}
+					<span className="tracks-count">{total} {total === 1 ? 'track' : 'tracks'}</span>
+				</span>
+				{expanded && <PlaylistInfo getPlaylistTracks={getPlaylistTracks} currentPlaylistTracks={currentPlaylistTracks} clearPlaylistTracks={clearPlaylistTracks} info={playlist}/>}
 			</li>
-		);		
+		);
 	}
 }
 
 Playlist.propTypes = {
-    playlist: PropTypes.object
+	expanded: PropTypes.bool,
+    playlist: PropTypes.object,
+    getPlaylistTracks: PropTypes.func,
+    clearPlaylistTracks: PropTypes.func,
+    expandPlaylist: PropTypes.func,
+    currentPlaylistTracks: PropTypes.object
 };
 
 export default Playlist;

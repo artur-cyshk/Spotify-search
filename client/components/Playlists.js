@@ -38,11 +38,23 @@ class Playlists extends Component {
 	}
 
     render() {
-    	const { error, data, loading: playlistsLoading } = this.props.playlists;
+    	const { playlists: initialPlaylists, expandPlaylist, getPlaylistTracks, clearPlaylistTracks, currentPlaylistTracks } = this.props;
+    	const { error, data, loading: playlistsLoading } = initialPlaylists;
     	const { searchValue } = this.state;
     	const playlists = (data.items || [])
     		.filter(playlist => playlist.name.toLowerCase().includes(searchValue.toLowerCase()))
-    		.map(playlist => <Playlist key={playlist.id} playlist={playlist}/>);	
+    		.sort((first, second) => first.tracks.total > second.tracks.total ? -1 : 1)
+    		.map(playlist => 
+	    			<Playlist 
+		    			expanded={initialPlaylists.currentExpandedPlaylist === playlist.id}
+		    			expandPlaylist={expandPlaylist}
+		    			getPlaylistTracks={getPlaylistTracks}
+		    			currentPlaylistTracks={currentPlaylistTracks}
+		    			clearPlaylistTracks={clearPlaylistTracks}
+		    			key={playlist.id} 
+		    			playlist={playlist}
+	    			/>
+    		);	
     	const foundedCount = playlists.length;
 
     	return <div className="playlists-wrapper">
@@ -67,9 +79,12 @@ class Playlists extends Component {
 
 Playlists.propTypes = {
     getUserPlaylists: PropTypes.func,
+    getPlaylistTracks: PropTypes.func,
     clearPlaylists: PropTypes.func,
-    playlists: PropTypes.object,
-    currentUser: PropTypes.object
+    clearPlaylistTracks: PropTypes.func,
+    currentPlaylistTracks: PropTypes.object,
+    expandPlaylist: PropTypes.func,
+    playlists: PropTypes.object
 };
 
 

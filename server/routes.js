@@ -12,7 +12,7 @@ const CLIENT_SECRET = config.spotifyData.CLIENT_SECRET;
 const REDIRECT_URI = config.spotifyData.server[process.env.NODE_ENV] + config.spotifyData.REDIRECT_URI;
 const STATE_KEY = 'spotify_auth_state';
 
-const scopes = ['playlist-read-private', 'user-read-private', 'user-read-email', 'user-read-currently-playing', 'user-read-playback-state', 'user-modify-playback-state'];
+const scopes = ['playlist-read-private', 'playlist-read-collaborative', 'user-read-private', 'user-read-email', 'user-read-currently-playing', 'user-read-playback-state', 'user-modify-playback-state'];
 
 const spotifyApi = new Spotify({
   clientId: CLIENT_ID,

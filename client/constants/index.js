@@ -14,7 +14,8 @@ export const SPOTIFY_METHODS = {
 	getMe: 'getMe',
 	play: 'play',
 	pause: 'pause',
-	getUserPlaylists: 'getUserPlaylists'
+	getUserPlaylists: 'getUserPlaylists',
+	getPlaylistTracks: 'getPlaylistTracks'
 };
 
 export const COMMON_DATA = {

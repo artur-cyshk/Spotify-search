@@ -3,7 +3,7 @@ import { addTrackToPlayer, removeTrackFromPlayer } from './audioPlayerCreators';
 import { getCurrentPlayingTrack, playTrack, changeTrackState } from './getCurrentPlayingTrackCreators';
 import { setAuthorization, getMe } from './authCreators';
 import { getDevices, removeDevices } from './devicesCreators';
-import { getUserPlaylists, clearPlaylists } from './playlistsCreators';
+import { getUserPlaylists, clearPlaylists, getPlaylistTracks, clearPlaylistTracks, expandPlaylist } from './playlistsCreators';
 
 export {
 	addTrackToPlayer, removeTrackFromPlayer,
@@ -11,5 +11,5 @@ export {
 	getCurrentPlayingTrack, playTrack, changeTrackState,
 	setAuthorization, getMe,
 	getDevices, removeDevices,
-	getUserPlaylists, clearPlaylists
+	getUserPlaylists, clearPlaylists, getPlaylistTracks, clearPlaylistTracks, expandPlaylist
 }

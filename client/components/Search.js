@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { debounce } from 'throttle-debounce';
 import PropTypes from 'prop-types';
-import { Track, Spinner, WindowScroll } from './';
+import { Spinner, WindowScroll } from './';
+import { Track } from '../containers';
 import { SEARCH_DEBOUNCE_IN_MS } from '../constants';
 import '../styles/search.less';
 
@@ -38,8 +39,8 @@ class Search extends Component {
 	}
 
 	render() {
-		const { tracks, addTrackToPlayer, removeTrackFromPlayer, currentPlayingInPlayer } = this.props;
-		const tracksList = tracks.list.map((track) => <Track currentPlayingInPlayer={currentPlayingInPlayer} addTrackToPlayer={addTrackToPlayer} removeTrackFromPlayer={removeTrackFromPlayer} key={track.id} info={track}/>);
+		const { tracks } = this.props;
+		const tracksList = tracks.list.map((track) => <Track key={track.id} info={track}/>);
 		return (
 			<WindowScroll onWindowScroll={this.loadMoreTracks}>
 				<div className="search-wrapper">
@@ -72,10 +73,7 @@ Search.propTypes = {
     	total: PropTypes.number,
     	error: PropTypes.object
     }),
-    currentPlayingInPlayer: PropTypes.object,
     searchTracks: PropTypes.func,
-    addTrackToPlayer: PropTypes.func,
-    removeTrackFromPlayer: PropTypes.func,
     clearTracksList: PropTypes.func
 }
 

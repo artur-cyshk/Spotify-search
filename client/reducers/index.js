@@ -5,7 +5,8 @@ import currentPlayingTrack from './currentPlayingTrack';
 import audioPlayer from './audioPlayer';
 import devices from './devices';
 import playlists from './playlists';
+import playlistTracks from './playlistTracks';
 
 export default combineReducers({
-	audioPlayer, tracks, currentPlayingTrack, auth, devices, playlists
+	audioPlayer, tracks, currentPlayingTrack, auth, devices, playlists, playlistTracks
 });
