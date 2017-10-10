@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Playlist, Spinner, WindowScroll } from './';
+import { MOBILE_SCROLL_OFFSET } from '../constants';
 import '../styles/playlists.less';
 
 class Playlists extends Component {
@@ -30,8 +31,8 @@ class Playlists extends Component {
 		if (total <= items.length) { 
 			return;
 		};
-		const { scrollHeight, offsetHeight, scrollTop } = ev.target.scrollingElement || ev.target;
-		if (offsetHeight + scrollTop >= scrollHeight) { 
+		const { scrollHeight, offsetHeight, scrollTop } = ev.srcElement.documentElement;
+		if (offsetHeight + scrollTop >= scrollHeight - MOBILE_SCROLL_OFFSET) { 
 			this.setState({ currentPage: ++this.state.currentPage });
 			this.props.getUserPlaylists(this.state.currentPage);
 		}

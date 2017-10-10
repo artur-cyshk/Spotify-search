@@ -3,7 +3,7 @@ import { debounce } from 'throttle-debounce';
 import PropTypes from 'prop-types';
 import { Spinner, WindowScroll } from './';
 import { Track } from '../containers';
-import { SEARCH_DEBOUNCE_IN_MS } from '../constants';
+import { SEARCH_DEBOUNCE_IN_MS, MOBILE_SCROLL_OFFSET} from '../constants';
 import '../styles/search.less';
 
 class Search extends Component {
@@ -31,8 +31,8 @@ class Search extends Component {
 		if (this.props.tracks.total <= this.props.tracks.list.length || !this.state.searchValue) { 
 			return;
 		};
-		const { scrollHeight, offsetHeight, scrollTop } = ev.target.scrollingElement || ev.target;
-		if (offsetHeight + scrollTop >= scrollHeight) { 
+		const { scrollHeight, offsetHeight, scrollTop } = ev.srcElement.documentElement;
+		if (offsetHeight + scrollTop >= scrollHeight - MOBILE_SCROLL_OFFSET) { 
 			this.setState({ currentPage: ++this.state.currentPage });
 			this.props.searchTracks(this.state.searchValue, this.state.currentPage);
 		}

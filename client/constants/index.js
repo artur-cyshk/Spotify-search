@@ -4,6 +4,7 @@ export const MUSIC_LIST_LIMIT = 40;
 export const PLAYLISTS_LIMIT = 10;
 export const SEARCH_DEBOUNCE_IN_MS = 500;
 export const UNAUTHORIZED_STATUS = 401;
+export const MOBILE_SCROLL_OFFSET = 150;
 
 export const SPOTIFY_METHODS = {
 	searchTracks: 'searchTracks',

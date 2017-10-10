@@ -7,6 +7,9 @@ import ToggleButton from 'react-toggle-button';
 class PlaylistInfo extends Component {
 
     //TODO add load more tracks logic
+    //TODO change sort
+    //TODO fix scroll jumping
+    //TODO fix scrolling on mobile
 
     constructor(props) {
         super(props);
