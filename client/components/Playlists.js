@@ -31,8 +31,9 @@ class Playlists extends Component {
 		if (total <= items.length) { 
 			return;
 		};
-		const { scrollHeight, offsetHeight, scrollTop } = ev.srcElement.documentElement;
-		if (offsetHeight + scrollTop >= scrollHeight - MOBILE_SCROLL_OFFSET) { 
+		let { scrollHeight, offsetHeight, scrollTop } = ev.srcElement ? ev.srcElement.documentElement : ev.target;
+		scrollHeight = ev.srcElement ? scrollHeight - MOBILE_SCROLL_OFFSET : scrollHeight;
+		if (offsetHeight + scrollTop >= scrollHeight) { 
 			this.setState({ currentPage: ++this.state.currentPage });
 			this.props.getUserPlaylists(this.state.currentPage);
 		}

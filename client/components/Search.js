@@ -31,8 +31,9 @@ class Search extends Component {
 		if (this.props.tracks.total <= this.props.tracks.list.length || !this.state.searchValue) { 
 			return;
 		};
-		const { scrollHeight, offsetHeight, scrollTop } = ev.srcElement.documentElement;
-		if (offsetHeight + scrollTop >= scrollHeight - MOBILE_SCROLL_OFFSET) { 
+		let { scrollHeight, offsetHeight, scrollTop } = ev.srcElement ? ev.srcElement.documentElement : ev.target;
+		scrollHeight = ev.srcElement ? scrollHeight - MOBILE_SCROLL_OFFSET : scrollHeight;
+		if (offsetHeight + scrollTop >= scrollHeight) { 
 			this.setState({ currentPage: ++this.state.currentPage });
 			this.props.searchTracks(this.state.searchValue, this.state.currentPage);
 		}
