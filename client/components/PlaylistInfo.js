@@ -7,20 +7,31 @@ import ToggleButton from 'react-toggle-button';
 class PlaylistInfo extends Component {
 
     //TODO add load more tracks logic
-    //TODO change sort
     //TODO fix scroll jumping
-    //TODO fix scrolling on mobile
 
     constructor(props) {
         super(props);
         this.state = {
-            isTracksListSmarted: false
+            isTracksListSmarted: false,
+            page: 0
         };
     }
 
 	componentDidMount() {
-		this.props.getPlaylistTracks(this.props.info.owner.id, this.props.info.id);
+		this.props.getPlaylistTracks(this.props.info.owner.id, this.props.info.id, 0);
 	}
+
+    loadMoreTracks = () => {
+        const { total, items = []} = this.props.currentPlaylistTracks.data || {};
+        if (total <= items.length) { 
+            return;
+        };
+        this.setState({
+            page: ++this.state.page
+        });
+        this.props.getPlaylistTracks(this.props.info.owner.id, this.props.info.id, this.state.page);
+        
+    }
 
     componentWillUnmount() {
         this.props.clearPlaylistTracks();
@@ -37,7 +48,8 @@ class PlaylistInfo extends Component {
         const { data, loading: trackLoading } = currentPlaylistTracks;
         const { images = [], owner = {}, external_urls = {} } = info;
         const { isTracksListSmarted } = this.state;
-        const tracks = data.items.map( ({track}) => <Track smarted={isTracksListSmarted} inline={true} key={track.id} info={track}/>);
+        const { items = [], total } = data;
+        const tracks = items.map( ({track}, i) => <Track smarted={isTracksListSmarted} inline={true} key={track.id + i} info={track}/>);
             
     	return (
     		<div className="playlist-info"> 
@@ -52,11 +64,14 @@ class PlaylistInfo extends Component {
                             />
                             {this.state.isTracksListSmarted ? 'Smart' : 'Full'} View
                        </span>
-                       
                     </span>
                 </div>
-                
                 <ul className="tracks-list-in-playlist">{tracks}</ul>
+                {total > items.length && 
+                    <button className="load-more-button" onClick={this.loadMoreTracks}>
+                        <i className="fa fa-angle-double-down" aria-hidden="true"></i>
+                    </button>
+                }
                 {trackLoading && <Spinner/>}
             </div>
     	);

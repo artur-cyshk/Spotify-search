@@ -5,7 +5,8 @@ import '../styles/playlist.less';
 
 class Playlist extends Component {
 
-	toggleInfoBlock = () => {
+	toggleInfoBlock = (ev) => {
+		console.dir(ev.target);
 		const { playlist = {tracks: {}}, expanded, expandPlaylist } = this.props;
 		const { total } = playlist.tracks;
 		if (total > 0) {
@@ -17,7 +18,7 @@ class Playlist extends Component {
 		const { expanded, playlist = {}, getPlaylistTracks, currentPlaylistTracks, clearPlaylistTracks } = this.props;
 		const { total } = playlist.tracks || {};
 		return (
-			<li className={`${expanded ? 'expanded' : ''} ${!total ? 'empty' : ''} playlist`}>
+			<li ref={(element) => this.playlistElement = element} className={`${expanded ? 'expanded' : ''} ${!total ? 'empty' : ''} playlist`}>
 				<span title={playlist.name} className="title" onClick={this.toggleInfoBlock}>
 					{playlist.name}
 					<span className="tracks-count">{total} {total === 1 ? 'track' : 'tracks'}</span>

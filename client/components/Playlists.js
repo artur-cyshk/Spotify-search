@@ -45,7 +45,6 @@ class Playlists extends Component {
     	const { searchValue } = this.state;
     	const playlists = (data.items || [])
     		.filter(playlist => playlist.name.toLowerCase().includes(searchValue.toLowerCase()))
-    		.sort((first, second) => first.tracks.total > second.tracks.total ? -1 : 1)
     		.map(playlist => 
 	    			<Playlist 
 		    			expanded={initialPlaylists.currentExpandedPlaylist === playlist.id}

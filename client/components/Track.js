@@ -21,7 +21,7 @@ class Track extends Component {
 	render() {
 		const { inline, smarted, info, addTrackToPlayer, removeTrackFromPlayer, currentPlayingInPlayer = {} } = this.props;
 	    const album = info.album || {};
-	    const { images } = album;
+	    const { images = [] } = album;
 	    const artists = (info.artists || []).map((artist) => artist.name).join();
 	    const isPlayingNow = info.id === currentPlayingInPlayer.id;
 		return (
@@ -33,7 +33,7 @@ class Track extends Component {
 						title={isPlayingNow ? `Now playing ${artists} - ${info.name}` : `Listen "${artists} - ${info.name}" preview`}
 					></i>
 				}
-				<img src={!!images ? (images[0] || {}).url : EMPTY_IMAGE_SRC}/>
+				<img src={(images[0] || {}).url || EMPTY_IMAGE_SRC}/>
 				{inline ?   
 					<div className="track-in-list-info">
 						<span>{artists} - {info.name}</span>

@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
 			return {
 				loading: false,
 				data: {
-					...action.payload, items: action.payload ? action.payload.items : []
+					...action.payload, items: action.payload ? state.data.items.concat(action.payload.items) : []
 				},
 				error: {}
 			};
