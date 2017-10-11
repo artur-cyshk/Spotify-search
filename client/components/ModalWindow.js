@@ -4,6 +4,14 @@ import '../styles/modal.less';
 
 class ModalWindow extends Component {
 
+	componentDidMount() {
+		document.querySelector('body').classList.add('overflow-hidden');
+	}
+
+	componentWillUnmount() {
+		document.querySelector('body').classList.remove('overflow-hidden');
+	}
+
 	closeModal = (e) => {
 		const { classList } = e.target;
 		if (classList.contains('close-button') || classList.contains('modal-wrapper')) {
