@@ -52,7 +52,9 @@ class PlaylistInfo extends Component {
     	return (
     		<div className="playlist-info"> 
                 <div className="playlist-header">
-                    <img className="playlist-image" src={(images[0] || {}).url}/>
+                    <div className="playlist-image">
+                        <img src={(images[0] || {}).url}/>
+                    </div>
                     <span>
                         <span className="toggle-wrapper">
                             <ToggleButton
