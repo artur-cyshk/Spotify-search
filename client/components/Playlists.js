@@ -51,7 +51,7 @@ class Playlists extends Component {
     		.filter(playlist => playlist.name.toLowerCase().includes(searchValue.toLowerCase()))
     		.map(playlist => 
     			<Playlist 
-	    			expanded={currentExpandedPlaylist === playlist.id}
+	    			expanded={currentExpandedPlaylist.id === playlist.id}
 	    			expandPlaylist={expandPlaylist}
 	    			key={playlist.id} 
 	    			playlist={playlist}

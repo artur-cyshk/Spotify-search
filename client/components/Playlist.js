@@ -18,8 +18,7 @@ class Playlist extends Component {
 		return (
 			<li className={`${expanded ? 'expanded' : ''} ${!total ? 'empty' : ''} playlist`}>
 				<span title={playlist.name} className="title" onClick={this.toggleInfoBlock}>
-					{playlist.name}
-					<span className="tracks-count">{total} {total === 1 ? 'track' : 'tracks'}</span>
+					{playlist.name}{total <= 0 && <span className="no-tracks">No tracks</span>}
 				</span>
 			</li>
 		);

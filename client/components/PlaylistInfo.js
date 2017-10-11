@@ -48,20 +48,21 @@ class PlaylistInfo extends Component {
         const { isTracksListSmarted } = this.state;
         const { items = [], total } = data;
         const tracks = items.map( ({track}, i) => <Track smarted={isTracksListSmarted} inline={true} key={track.id + i} info={track}/>);
-            
+        
     	return (
     		<div className="playlist-info"> 
                 <div className="playlist-header">
                     <img className="playlist-image" src={(images[0] || {}).url}/>
                     <span>
-                       <a href={external_urls.spotify} target="_blank">{owner.display_name ? `${owner.display_name}'s playlist` : 'No owner'}</a>
-                       <span className="toggle-wrapper">
+                        <span className="toggle-wrapper">
                             <ToggleButton
                                 value={isTracksListSmarted}
                                 onToggle={this.handleToggleChange}
                             />
                             {this.state.isTracksListSmarted ? 'Smart' : 'Full'} View
-                       </span>
+                        </span>
+                        <a title={`Go to ${owner.display_name || 'owner'}'s playlist`} href={external_urls.spotify} target="_blank">{owner.display_name ? `${owner.display_name}'s playlist` : 'No owner'}</a>
+                        {!!tracks.length && <span> <span className="tracks-total">{tracks.length}</span>/{total} tracks</span>}
                     </span>
                 </div>
                 <ul className="tracks-list-in-playlist" onScroll={this.loadMoreTracks}>
