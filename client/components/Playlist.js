@@ -1,29 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PlaylistInfo } from './';
 import '../styles/playlist.less';
 
 class Playlist extends Component {
 
 	toggleInfoBlock = (ev) => {
-		console.dir(ev.target);
 		const { playlist = {tracks: {}}, expanded, expandPlaylist } = this.props;
 		const { total } = playlist.tracks;
 		if (total > 0) {
-			expandPlaylist(expanded ? false : playlist.id);
+			expandPlaylist(expanded ? {} : playlist);
 		}
 	}
 
 	render() {
-		const { expanded, playlist = {}, getPlaylistTracks, currentPlaylistTracks, clearPlaylistTracks } = this.props;
+		const { expanded, playlist = {} } = this.props;
 		const { total } = playlist.tracks || {};
 		return (
-			<li ref={(element) => this.playlistElement = element} className={`${expanded ? 'expanded' : ''} ${!total ? 'empty' : ''} playlist`}>
+			<li className={`${expanded ? 'expanded' : ''} ${!total ? 'empty' : ''} playlist`}>
 				<span title={playlist.name} className="title" onClick={this.toggleInfoBlock}>
 					{playlist.name}
 					<span className="tracks-count">{total} {total === 1 ? 'track' : 'tracks'}</span>
 				</span>
-				{expanded && <PlaylistInfo getPlaylistTracks={getPlaylistTracks} currentPlaylistTracks={currentPlaylistTracks} clearPlaylistTracks={clearPlaylistTracks} info={playlist}/>}
 			</li>
 		);
 	}
@@ -32,10 +29,7 @@ class Playlist extends Component {
 Playlist.propTypes = {
 	expanded: PropTypes.bool,
     playlist: PropTypes.object,
-    getPlaylistTracks: PropTypes.func,
-    clearPlaylistTracks: PropTypes.func,
-    expandPlaylist: PropTypes.func,
-    currentPlaylistTracks: PropTypes.object
+    expandPlaylist: PropTypes.func
 };
 
 export default Playlist;

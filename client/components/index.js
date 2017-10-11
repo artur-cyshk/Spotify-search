@@ -13,8 +13,9 @@ import Profile from './Profile';
 import Playlists from './Playlists';
 import Playlist from './Playlist';
 import PlaylistInfo from './PlaylistInfo';
+import ModalWindow from './ModalWindow';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, WindowScroll, AudioPlayer, Header, Profile, Playlist, Playlists, PlaylistInfo
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, ModalWindow, WindowScroll, AudioPlayer, Header, Profile, Playlist, Playlists, PlaylistInfo
 }

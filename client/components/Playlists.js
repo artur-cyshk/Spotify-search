@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Playlist, Spinner, WindowScroll } from './';
+import { Playlist, Spinner, WindowScroll, PlaylistInfo, ModalWindow } from './';
 import { MOBILE_SCROLL_OFFSET } from '../constants';
 import '../styles/playlists.less';
 
@@ -39,22 +39,23 @@ class Playlists extends Component {
 		}
 	}
 
+	closeModalHandler = () => {
+		this.props.expandPlaylist({});
+	}
+
     render() {
     	const { playlists: initialPlaylists, expandPlaylist, getPlaylistTracks, clearPlaylistTracks, currentPlaylistTracks } = this.props;
-    	const { error, data, loading: playlistsLoading } = initialPlaylists;
+    	const { error, data, loading: playlistsLoading, currentExpandedPlaylist } = initialPlaylists;
     	const { searchValue } = this.state;
     	const playlists = (data.items || [])
     		.filter(playlist => playlist.name.toLowerCase().includes(searchValue.toLowerCase()))
     		.map(playlist => 
-	    			<Playlist 
-		    			expanded={initialPlaylists.currentExpandedPlaylist === playlist.id}
-		    			expandPlaylist={expandPlaylist}
-		    			getPlaylistTracks={getPlaylistTracks}
-		    			currentPlaylistTracks={currentPlaylistTracks}
-		    			clearPlaylistTracks={clearPlaylistTracks}
-		    			key={playlist.id} 
-		    			playlist={playlist}
-	    			/>
+    			<Playlist 
+	    			expanded={currentExpandedPlaylist === playlist.id}
+	    			expandPlaylist={expandPlaylist}
+	    			key={playlist.id} 
+	    			playlist={playlist}
+    			/>
     		);	
     	const foundedCount = playlists.length;
 
@@ -71,6 +72,11 @@ class Playlists extends Component {
 						</span>}
 					</div>
 					<ul className="playlists-list" onScroll={this.loadMorePlaylists}>{playlists}</ul>
+					{currentExpandedPlaylist.id &&
+						<ModalWindow onCloseModal={this.closeModalHandler} title={`${currentExpandedPlaylist.name} Playlist`}>
+							<PlaylistInfo getPlaylistTracks={getPlaylistTracks} currentPlaylistTracks={currentPlaylistTracks} clearPlaylistTracks={clearPlaylistTracks} info={currentExpandedPlaylist}/>
+						</ModalWindow>
+					}
 					{playlistsLoading && <Spinner/>}
 				</div>
 			</WindowScroll>	

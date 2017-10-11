@@ -4,7 +4,7 @@ const initialState = {
 	data: {},
 	loading: false,
 	error: {},
-	currentExpandedPlaylist: null
+	currentExpandedPlaylist: {}
 };
 
 export default (state = initialState, action) => {
@@ -43,7 +43,8 @@ export default (state = initialState, action) => {
 				...state,
 				loading: false,
 				data: {},
-				error: {}
+				error: {},
+				currentExpandedPlaylist: {}
 			};
 		default:
 			return state;	

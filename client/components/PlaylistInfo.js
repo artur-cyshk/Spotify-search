@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { Spinner } from './';
 import { Track } from '../containers';
 import ToggleButton from 'react-toggle-button';
+import '../styles/playlistInfo.less';
 
 class PlaylistInfo extends Component {
-
-    //TODO add load more tracks logic
-    //TODO fix scroll jumping
 
     constructor(props) {
         super(props);
@@ -21,16 +19,16 @@ class PlaylistInfo extends Component {
 		this.props.getPlaylistTracks(this.props.info.owner.id, this.props.info.id, 0);
 	}
 
-    loadMoreTracks = () => {
+    loadMoreTracks = (ev) => {
         const { total, items = []} = this.props.currentPlaylistTracks.data || {};
         if (total <= items.length) { 
             return;
         };
-        this.setState({
-            page: ++this.state.page
-        });
-        this.props.getPlaylistTracks(this.props.info.owner.id, this.props.info.id, this.state.page);
-        
+        const { scrollHeight, offsetHeight, scrollTop } = ev.target;
+        if (offsetHeight + scrollTop >= scrollHeight) {
+            this.setState({ page: ++this.state.page });
+            this.props.getPlaylistTracks(this.props.info.owner.id, this.props.info.id, this.state.page);
+        }
     }
 
     componentWillUnmount() {
@@ -66,13 +64,11 @@ class PlaylistInfo extends Component {
                        </span>
                     </span>
                 </div>
-                <ul className="tracks-list-in-playlist">{tracks}</ul>
-                {total > items.length && 
-                    <button className="load-more-button" onClick={this.loadMoreTracks}>
-                        <i className="fa fa-angle-double-down" aria-hidden="true"></i>
-                    </button>
-                }
-                {trackLoading && <Spinner/>}
+                <ul className="tracks-list-in-playlist" onScroll={this.loadMoreTracks}>
+                    {tracks}
+                    {trackLoading && <Spinner/>}
+                </ul>
+                
             </div>
     	);
     }

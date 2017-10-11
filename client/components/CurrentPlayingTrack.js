@@ -80,9 +80,9 @@ export default class CurrentPlayingTrack extends Component {
                         <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
                             <i className="fa fa-refresh"/>
                         </button>
-                        <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
+                        { isPremium && <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
                             <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
-                        </button>
+                        </button> }
                         <button 
                             title="listen track preview"
                             className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
