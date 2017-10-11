@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { debounce } from 'throttle-debounce';
 import PropTypes from 'prop-types';
-import { Spinner, WindowScroll } from './';
+import { Spinner, WindowEvent } from './';
 import { Track } from '../containers';
 import { SEARCH_DEBOUNCE_IN_MS, MOBILE_SCROLL_OFFSET} from '../constants';
 import '../styles/search.less';
@@ -43,7 +43,7 @@ class Search extends Component {
 		const { tracks } = this.props;
 		const tracksList = tracks.list.map((track) => <Track key={track.id} info={track}/>);
 		return (
-			<WindowScroll onWindowScroll={this.loadMoreTracks}>
+			<WindowEvent eventType="scroll" onEventHandled={this.loadMoreTracks}>
 				<div className="search-wrapper">
 					<input type="text" placeholder="Search tracks" className="search-input" onKeyUp={this.searchTracksHandler}/>
 					<div className="search-result">
@@ -62,7 +62,7 @@ class Search extends Component {
 					</ul>
 					{tracks.loading && <Spinner/>}
 				</div>
-			</WindowScroll>	
+			</WindowEvent>	
 		);		
 	}
 };

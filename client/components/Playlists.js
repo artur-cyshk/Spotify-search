@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Playlist, Spinner, WindowScroll, PlaylistInfo, ModalWindow } from './';
+import { Playlist, Spinner, WindowEvent, PlaylistInfo, ModalWindow } from './';
 import { MOBILE_SCROLL_OFFSET } from '../constants';
 import '../styles/playlists.less';
 
@@ -60,7 +60,7 @@ class Playlists extends Component {
     	const foundedCount = playlists.length;
 
     	return <div className="playlists-wrapper">
-    		<WindowScroll onWindowScroll={this.loadMorePlaylists}>
+    		<WindowEvent eventType="scroll" onEventHandled={this.loadMorePlaylists}>
 	    		<div className="search-wrapper">
 					<input type="text" placeholder="Search in loaded playlists" className="search-input" onKeyUp={this.searchPlaylistHandler}/>
 					<div className="search-result">
@@ -79,7 +79,7 @@ class Playlists extends Component {
 					}
 					{playlistsLoading && <Spinner/>}
 				</div>
-			</WindowScroll>	
+			</WindowEvent>	
     	</div>;
     }
 }

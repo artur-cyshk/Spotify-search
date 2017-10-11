@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Spinner } from './';
+import { Spinner, WindowEvent } from './';
 import PropTypes from 'prop-types';
 import { COMMON_DATA } from '../constants';
 import '../styles/currentPlaying.less';
@@ -69,58 +69,60 @@ export default class CurrentPlayingTrack extends Component {
         const deviceIconClass = this.getDeviceIcon(this.activeDevice.type);
         return (
             <div className="current-playing">
-                <div className="player-control">
-                    {isPremium && <button disabled={loadingPrevTrack || !this.activeDevice.type} className="load-track load-prev-track" onClick={this.prevTrack}>
-                        {loadingPrevTrack && <Spinner/> || <i className="fa fa-step-backward"></i>}
-                    </button>}
-                    <div className="track-info-wrapper">
-                        <div className="active-device-type">
-                             {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
+                <WindowEvent eventType="focus" onEventHandled={this.loadCurrentPlayingTrack}>
+                    <div className="player-control">
+                        {isPremium && <button disabled={loadingPrevTrack || !this.activeDevice.type} className="load-track load-prev-track" onClick={this.prevTrack}>
+                            {loadingPrevTrack && <Spinner/> || <i className="fa fa-step-backward"></i>}
+                        </button>}
+                        <div className="track-info-wrapper">
+                            <div className="active-device-type">
+                                 {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
+                            </div>
+                            <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
+                                <i className="fa fa-refresh"/>
+                            </button>
+                            { isPremium && <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
+                                <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
+                            </button> }
+                            <button 
+                                title="listen track preview"
+                                className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
+                                disabled={!track.preview_url} 
+                                onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+                            >
+                                <i className="fa fa-music"/>
+                            </button>
+                            {loadingCurrentPlayingTrack ? <Spinner/> :
+                                track.name ?
+                                <div className="track-info">
+                                    <div className="album-image">
+                                        <img src={!!images ? images[0].url : null}/>
+                                    </div>
+                                    <div className="song-info">
+                                        <span>
+                                            <i className="fa fa-book" aria-hidden="true"></i>
+                                            {album.name}
+                                        </span>
+                                        <span>
+                                            <i className="fa fa-users" aria-hidden="true"></i>
+                                            {artists}
+                                        </span>
+                                        <span>
+                                           <i className="fa fa-music" aria-hidden="true"></i>
+                                           {track.name}
+                                        </span>
+                                    </div>
+                                </div> :
+                                <span className="warning">
+                                    { error.message ? error.message : 'There are no playing tracks' }
+                                </span>
+                            }
                         </div>
-                        <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
-                            <i className="fa fa-refresh"/>
-                        </button>
-                        { isPremium && <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
-                            <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
-                        </button> }
-                        <button 
-                            title="listen track preview"
-                            className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
-                            disabled={!track.preview_url} 
-                            onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
-                        >
-                            <i className="fa fa-music"/>
-                        </button>
-                        {loadingCurrentPlayingTrack ? <Spinner/> :
-                            track.name ?
-                            <div className="track-info">
-                                <div className="album-image">
-                                    <img src={!!images ? images[0].url : null}/>
-                                </div>
-                                <div className="song-info">
-                                    <span>
-                                        <i className="fa fa-book" aria-hidden="true"></i>
-                                        {album.name}
-                                    </span>
-                                    <span>
-                                        <i className="fa fa-users" aria-hidden="true"></i>
-                                        {artists}
-                                    </span>
-                                    <span>
-                                       <i className="fa fa-music" aria-hidden="true"></i>
-                                       {track.name}
-                                    </span>
-                                </div>
-                            </div> :
-                            <span className="warning">
-                                { error.message ? error.message : 'There are no playing tracks' }
-                            </span>
-                        }
+                        {isPremium && <button disabled={loadingNextTrack || !this.activeDevice.type} className="load-track load-next-track" onClick={this.nextTrack}>
+                            {loadingNextTrack ? <Spinner/> : <i className="fa fa-step-forward"></i>}
+                        </button>}
                     </div>
-                    {isPremium && <button disabled={loadingNextTrack || !this.activeDevice.type} className="load-track load-next-track" onClick={this.nextTrack}>
-                        {loadingNextTrack ? <Spinner/> : <i className="fa fa-step-forward"></i>}
-                    </button>}
-                </div>
+                </WindowEvent>
             </div>
         );
     }

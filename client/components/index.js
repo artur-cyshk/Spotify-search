@@ -7,7 +7,7 @@ import Navigate from './Navigate';
 import Spinner from './Spinner';
 import Logout from './Logout';
 import AudioPlayer from './AudioPlayer';
-import WindowScroll from './WindowScroll';
+import WindowEvent from './WindowEvent';
 import Header from './Header';
 import Profile from './Profile';
 import Playlists from './Playlists';
@@ -17,5 +17,5 @@ import ModalWindow from './ModalWindow';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, ModalWindow, WindowScroll, AudioPlayer, Header, Profile, Playlist, Playlists, PlaylistInfo
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, ModalWindow, WindowEvent, AudioPlayer, Header, Profile, Playlist, Playlists, PlaylistInfo
 }
