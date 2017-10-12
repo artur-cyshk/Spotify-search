@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
 				loadingNextTrack: false,
 				loadingPrevTrack: false,
 				error: {},
-				track: {}
+				...state
 			};
 		case GET_CURRENT_PLAYING_TRACK_READY:
 			const { item } = action.payload || {};

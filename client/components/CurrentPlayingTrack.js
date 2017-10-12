@@ -15,12 +15,12 @@ export default class CurrentPlayingTrack extends Component {
         this.props.removeTrackFromPlayer();
     }
 
-    componentDidMount() {
-        this.loadCurrentPlayingTrack();
+    changeTrackState = () => {
+        this.props.changeTrackState({}, this.props.currentPlayingTrack.track.is_playing)
     }
 
-    changeTrackState = () => {
-        this.props.changeTrackState({device_id: this.activeDevice.id}, this.props.currentPlayingTrack.track.is_playing)
+    componentDidMount() {
+        this.loadCurrentPlayingTrack();
     }
 
     componentWillUnmount() {
@@ -35,12 +35,12 @@ export default class CurrentPlayingTrack extends Component {
     }
 
     nextTrack = () => {
-        this.props.playTrack({device_id: this.activeDevice.id}, true);
+        this.props.playTrack({}, true);
         this.removeTrackFromAudioPlayer();
     }
 
     prevTrack = () => {
-        this.props.playTrack({device_id: this.activeDevice.id});
+        this.props.playTrack({});
         this.removeTrackFromAudioPlayer();
     }
 
@@ -58,73 +58,70 @@ export default class CurrentPlayingTrack extends Component {
     render() {
         const { currentPlayingTrack, devices, currentPlayingInPlayer = {}, auth } = this.props;
         const { track, loadingCurrentPlayingTrack, loadingNextTrack, loadingPrevTrack, error, loadingTrackState } = currentPlayingTrack;
-        const { loading: loadingDevices, list: devicesList } = devices;
+        const { loading: loadingDevices, list: devicesList, activeDevice } = devices;
         const album = track.album || {};
         const { images } = album;
         const artists = (track.artists || []).map((artist) => artist.name).join();
         const { product } = auth.user;
         const isPremium = product === COMMON_DATA.premiumAccount;
         const nowPlayedInLocalPlayer = track.id && track.id === currentPlayingInPlayer.id;
-        this.activeDevice = devicesList.find(device => device.is_active) || {};
-        const deviceIconClass = this.getDeviceIcon(this.activeDevice.type);
+        const deviceIconClass = this.getDeviceIcon(activeDevice.type);
         return (
             <div className="current-playing">
-                <WindowEvent eventType="focus" onEventHandled={this.loadCurrentPlayingTrack}>
-                    <div className="player-control">
-                        {isPremium && <button disabled={loadingPrevTrack || !this.activeDevice.type} className="load-track load-prev-track" onClick={this.prevTrack}>
-                            {loadingPrevTrack && <Spinner/> || <i className="fa fa-step-backward"></i>}
-                        </button>}
-                        <div className="track-info-wrapper">
-                            <div className="active-device-type">
-                                 {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
-                            </div>
-                            <div className="action-buttons">
-                                <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
-                                    <i className="fa fa-refresh"/>
-                                </button>
-                                { isPremium && <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
-                                    <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
-                                </button> }
-                                <button 
-                                    title="listen track preview"
-                                    className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
-                                    disabled={!track.preview_url} 
-                                    onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
-                                >
-                                    <i className="fa fa-music"/>
-                                </button>
-                            </div>
-                            {loadingCurrentPlayingTrack ? <Spinner/> :
-                                track.name ?
-                                <div className="track-info">
-                                    <div className="album-image">
-                                        <img src={!!images ? images[0].url : null}/>
-                                    </div>
-                                    <div className="song-info">
-                                        <span>
-                                            <i className="fa fa-book" aria-hidden="true"></i>
-                                            {album.name}
-                                        </span>
-                                        <span>
-                                            <i className="fa fa-users" aria-hidden="true"></i>
-                                            {artists}
-                                        </span>
-                                        <span>
-                                           <i className="fa fa-music" aria-hidden="true"></i>
-                                           {track.name}
-                                        </span>
-                                    </div>
-                                </div> :
-                                <span className="warning">
-                                    { error.message ? error.message : 'There are no playing tracks' }
-                                </span>
-                            }
+                <div className="player-control">
+                    {isPremium && <button disabled={loadingPrevTrack || !activeDevice.type} className="load-track load-prev-track" onClick={this.prevTrack}>
+                        {loadingPrevTrack && <Spinner/> || <i className="fa fa-step-backward"></i>}
+                    </button>}
+                    <div className="track-info-wrapper">
+                        <div className="active-device-type">
+                             {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
                         </div>
-                        {isPremium && <button disabled={loadingNextTrack || !this.activeDevice.type} className="load-track load-next-track" onClick={this.nextTrack}>
-                            {loadingNextTrack ? <Spinner/> : <i className="fa fa-step-forward"></i>}
-                        </button>}
+                        <div className="action-buttons">
+                            <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
+                                <i className="fa fa-refresh"/>
+                            </button>
+                            { isPremium && <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
+                                <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
+                            </button> }
+                            <button 
+                                title="listen track preview"
+                                className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
+                                disabled={!track.preview_url} 
+                                onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+                            >
+                                <i className="fa fa-music"/>
+                            </button>
+                        </div>
+                        {loadingCurrentPlayingTrack ? <Spinner/> :
+                            track.name ?
+                            <div className="track-info">
+                                <div className="album-image">
+                                    <img src={!!images ? images[0].url : null}/>
+                                </div>
+                                <div className="song-info">
+                                    <span>
+                                        <i className="fa fa-book" aria-hidden="true"></i>
+                                        {album.name}
+                                    </span>
+                                    <span>
+                                        <i className="fa fa-users" aria-hidden="true"></i>
+                                        {artists}
+                                    </span>
+                                    <span>
+                                       <i className="fa fa-music" aria-hidden="true"></i>
+                                       {track.name}
+                                    </span>
+                                </div>
+                            </div> :
+                            <span className="warning">
+                                { error.message ? error.message : 'There are no playing tracks' }
+                            </span>
+                        }
                     </div>
-                </WindowEvent>
+                    {isPremium && <button disabled={loadingNextTrack || !activeDevice.type} className="load-track load-next-track" onClick={this.nextTrack}>
+                        {loadingNextTrack ? <Spinner/> : <i className="fa fa-step-forward"></i>}
+                    </button>}
+                </div>
             </div>
         );
     }

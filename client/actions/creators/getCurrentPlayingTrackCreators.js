@@ -19,10 +19,16 @@ const changeTrackStateReady = (res, err) => {
   };
 }
 
-export const changeTrackState = (options, isPlayingNow) => {
+export const changeTrackState = (options, isPlayingNow, needRefresh) => {
   return { 
     type: CHANGE_TRACK_STATE,
-    onSuccess: (res, dispatch) => dispatch(changeTrackStateReady({ isPlayingNow: isPlayingNow }, null)),
+    onSuccess: (res, dispatch) => {
+      if (needRefresh) {
+        setTimeout(()=> dispatch(getCurrentPlayingTrack()), 500);
+      }else {
+        dispatch(changeTrackStateReady({ isPlayingNow: isPlayingNow }, null));
+      }
+    },
     onFailure: (res, dispatch) => dispatch(changeTrackStateReady(null, res)),
     spotifyData: {
       method: isPlayingNow ? SPOTIFY_METHODS.pause : SPOTIFY_METHODS.play,

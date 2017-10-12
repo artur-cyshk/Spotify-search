@@ -6,7 +6,7 @@ import '../styles/login.less';
 export default class Login extends Component {
 
     componentDidMount() {
-        const { match, setAuthorization } = this.props;
+        const { match, setAuthorization, getCurrentPlayingTrack } = this.props;
         const { accessToken, refreshToken, errorMsg } = match.params;
         if (accessToken && refreshToken) {
             localStorageService.setItem('accessToken', accessToken);
@@ -14,6 +14,7 @@ export default class Login extends Component {
             setAuthorization(true);
             historyService.getHistory().push('/search');
             this.props.getMe();
+            this.props.getCurrentPlayingTrack();
         }
         if (errorMsg) {
             localStorageService.removeItem('accessToken');
@@ -41,5 +42,6 @@ Login.propTypes = {
         setAuthorization: PropTypes.func
     }),
     getMe: PropTypes.func,
+    loadDataOnInit: PropTypes.func,
     setAuthorization: PropTypes.func
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EMPTY_IMAGE_SRC } from '../constants';
+import { EMPTY_IMAGE_SRC, COMMON_DATA } from '../constants';
 import '../styles/track.less';
 
 class Track extends Component {
@@ -18,13 +18,22 @@ class Track extends Component {
 		this.removeTrackFromAudioPlayer();
 	}
 
+	changeTrackState = () => {
+        const { info, currentPlayingGlobally, changeTrackState } = this.props;
+        const isPlayingGlobally = info.id === currentPlayingGlobally.track.id && currentPlayingGlobally.track.is_playing;
+        changeTrackState({ uris: [info.uri] }, isPlayingGlobally, true);
+    }
+
 	render() {
-		const { inline, smarted, info, addTrackToPlayer, removeTrackFromPlayer, currentPlayingInPlayer = {}, currentPlayingGlobally } = this.props;
+		const { inline, smarted, info, addTrackToPlayer, removeTrackFromPlayer, currentPlayingInPlayer = {}, currentPlayingGlobally, auth } = this.props;
+		const { track: currentPlayingGloballyTrack, loadingTrackState } = currentPlayingGlobally;	
 	    const album = info.album || {};
 	    const { images = [] } = album;
 	    const artists = (info.artists || []).map((artist) => artist.name).join();
 	    const isPlayingLocally = info.id === currentPlayingInPlayer.id;
-	    const isPlayingGlobally = info.id === currentPlayingGlobally.id;
+	    const isPlayingGlobally = info.id === currentPlayingGloballyTrack.id;
+	    const { product } = auth.user;
+        const isPremium = product === COMMON_DATA.premiumAccount;
 
 		return (
 			<li title={smarted ? `${artists} - ${info.name}` : ''} className={`track-in-list ${inline ? 'inline' : ''} ${smarted ? 'smarted' : ''}`}>
@@ -48,6 +57,9 @@ class Track extends Component {
 					>
 						<i className="fa fa-music"></i>
 					</button>
+					{ isPremium && <button title={isPlayingGlobally && currentPlayingGloballyTrack.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState} onClick={this.changeTrackState}>
+                        <i className={`fa ${isPlayingGlobally && currentPlayingGloballyTrack.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
+                    </button> }
 				</div>	
 			</li>
 		);
