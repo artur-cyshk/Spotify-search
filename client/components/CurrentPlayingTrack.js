@@ -78,20 +78,22 @@ export default class CurrentPlayingTrack extends Component {
                             <div className="active-device-type">
                                  {loadingDevices ? <Spinner/> : <i className={` fa ${deviceIconClass}`} aria-hidden="true"></i>}
                             </div>
-                            <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
-                                <i className="fa fa-refresh"/>
-                            </button>
-                            { isPremium && <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
-                                <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
-                            </button> }
-                            <button 
-                                title="listen track preview"
-                                className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
-                                disabled={!track.preview_url} 
-                                onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
-                            >
-                                <i className="fa fa-music"/>
-                            </button>
+                            <div className="action-buttons">
+                                <button title="refresh" className="refresh-button" onClick={this.loadCurrentPlayingTrack}>
+                                    <i className="fa fa-refresh"/>
+                                </button>
+                                { isPremium && <button title={track.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState || !track.id} onClick={this.changeTrackState}>
+                                    <i className={`fa ${track.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
+                                </button> }
+                                <button 
+                                    title="listen track preview"
+                                    className={`preview-button ${nowPlayedInLocalPlayer ? 'now-played' : ''}`} 
+                                    disabled={!track.preview_url} 
+                                    onClick={nowPlayedInLocalPlayer ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+                                >
+                                    <i className="fa fa-music"/>
+                                </button>
+                            </div>
                             {loadingCurrentPlayingTrack ? <Spinner/> :
                                 track.name ?
                                 <div className="track-info">

@@ -42,6 +42,7 @@ class Search extends Component {
 	render() {
 		const { tracks } = this.props;
 		const tracksList = tracks.list.map((track) => <Track key={track.id} info={track}/>);
+
 		return (
 			<WindowEvent eventType="scroll" onEventHandled={this.loadMoreTracks}>
 				<div className="search-wrapper">

@@ -9,6 +9,44 @@
 	display: inline-flex;
 	margin: 10px;
 
+	& > .actions {
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 5px;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		z-index: 1;
+		background: @blackWithTransparent;
+		width: 100%;
+
+		& > button {
+			background: transparent;
+			outline: none;
+			border: 0;
+			margin-bottom: 3px;
+		    z-index: 2;
+		    font-size: 25px;
+		    color: #eeeeee;
+		    cursor: pointer;
+		    transition: 0.3s linear all;
+
+		    &:hover {
+		    	color: @yellow;
+		    }
+
+		    &:active, &.active {
+		    	color: @darkYellow;
+		    }
+
+		    &[disabled] {
+				cursor: default;
+				color: grey;
+			}
+		}	
+	}
+
 	&.inline {
 		width: 100%;
 		font-size: 20px;
@@ -20,6 +58,12 @@
 		margin: 0;
 		margin-bottom: 10px;
 		border-radius: 5px;
+
+		& > .actions {
+			position: relative;
+			width: auto;
+			background: rgb(50, 51, 49);
+		}
 
 		& > img {
 			position: relative;
@@ -62,39 +106,9 @@
 		}
 	}
 
-	& > i.fa-play, i.fa-stop {
 
-		&.fa-play, &.fa-stop {
-			position: absolute;
-		    top: 5px;
-		    z-index: 1;
-		    left: 5px;
-		    font-size: 19px;
-		    color: white;
-		    background: #37393a;
-		    cursor: pointer;
-		    padding: 5px;
-		    width: 40px;
-		    height: 40px;
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    transition: 0.3s linear all;
-		    border-radius: 50%;
 
-		   	&:hover {
-		   		color: #dbdbdb;
-		   	}
 
-		   	&:active {
-			    color: #9ba060;
-		   	}		
-		}
-
-		&.fa-play:before {
-    		margin-left: 4px;
-		}
-	}
 
 	& > img {
 		position: absolute;

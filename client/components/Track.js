@@ -19,20 +19,15 @@ class Track extends Component {
 	}
 
 	render() {
-		const { inline, smarted, info, addTrackToPlayer, removeTrackFromPlayer, currentPlayingInPlayer = {} } = this.props;
+		const { inline, smarted, info, addTrackToPlayer, removeTrackFromPlayer, currentPlayingInPlayer = {}, currentPlayingGlobally } = this.props;
 	    const album = info.album || {};
 	    const { images = [] } = album;
 	    const artists = (info.artists || []).map((artist) => artist.name).join();
-	    const isPlayingNow = info.id === currentPlayingInPlayer.id;
+	    const isPlayingLocally = info.id === currentPlayingInPlayer.id;
+	    const isPlayingGlobally = info.id === currentPlayingGlobally.id;
+
 		return (
-			<li className={`track-in-list ${inline ? 'inline' : ''} ${smarted ? 'smarted' : ''}`}>
-				{info.preview_url && 
-					<i 
-						className={`fa ${isPlayingNow ? 'fa-stop' : 'fa-play'}`} 
-						onClick={isPlayingNow ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
-						title={isPlayingNow ? `Now playing ${artists} - ${info.name}` : `Listen "${artists} - ${info.name}" preview`}
-					></i>
-				}
+			<li title={smarted ? `${artists} - ${info.name}` : ''} className={`track-in-list ${inline ? 'inline' : ''} ${smarted ? 'smarted' : ''}`}>
 				<img src={(images[0] || {}).url || EMPTY_IMAGE_SRC}/>
 				{inline ?   
 					<div className="track-in-list-info">
@@ -44,6 +39,16 @@ class Track extends Component {
 						<span title={info.name}><i className="fa fa-music" aria-hidden="true"></i>{info.name}</span>
 					</div>
 				}
+				<div className="actions">
+					<button
+						className={`preview-button ${isPlayingLocally ? 'active' : ''}`} 
+						onClick={isPlayingLocally ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+						disabled={!info.preview_url} 
+						title={isPlayingLocally ? `Now playing ${artists} - ${info.name}` : `Listen "${artists} - ${info.name}" preview`}
+					>
+						<i className="fa fa-music"></i>
+					</button>
+				</div>	
 			</li>
 		);
 	}
@@ -58,6 +63,7 @@ Track.propTypes = {
     addTrackToPlayer: PropTypes.func,
     removeTrackFromPlayer: PropTypes.func,
     currentPlayingInPlayer: PropTypes.object,
+    currentPlayingGlobally: PropTypes.object,
     inline: PropTypes.bool,
     smarted: PropTypes.bool 
 };

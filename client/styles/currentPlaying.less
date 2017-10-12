@@ -86,45 +86,55 @@
 			font-weight: 200;
 		}
 
-		& > .preview-button, & > .refresh-button, & > .play-button {
-			background: transparent;
-			outline: none;
-			border: 0;
-		    position: absolute;
-		    right: 15px;
-		    top: 15px;
-		    z-index: 2;
-		    font-size: 25px;
-		    color: #eeeeee;
-		    cursor: pointer;
-		    transition: 0.3s linear all;
+		& > .action-buttons {
+			right: 15px;
+			top: 15px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
 
-		    &:hover {
-		    	color: @yellow;
-		    }
+			& > .preview-button, & > .refresh-button, & > .play-button {
+				background: transparent;
+				outline: none;
+				border: 0;
+				margin-bottom: 3px;
+			    z-index: 2;
+			    font-size: 25px;
+			    color: #eeeeee;
+			    cursor: pointer;
+			    transition: 0.3s linear all;
 
-		    &:active {
-		    	color: @darkYellow;
-		    }
+			    &:hover {
+			    	color: @yellow;
+			    }
 
-		    &[disabled] {
-				cursor: default;
-				color: grey;
+			    &:active {
+			    	color: @darkYellow;
+			    }
+
+			    &[disabled] {
+					cursor: default;
+					color: grey;
+				}
+			}
+
+			& > .play-button {
+				top: 78px;
+			}
+
+			& > .preview-button {
+				top: 45px;
+				outline: none;
+
+				&.now-played {
+					color: @darkYellow;
+				}
 			}
 		}
 
-		& > .play-button {
-			top: 78px;
-		}
 
-		& > .preview-button {
-			top: 45px;
-			outline: none;
-
-			&.now-played {
-				color: @darkYellow;
-			}
-		}
 
 		& > .track-info {
 			display: flex;

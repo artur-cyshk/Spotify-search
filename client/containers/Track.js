@@ -5,6 +5,6 @@ import { addTrackToPlayer, removeTrackFromPlayer } from '../actions/creators';
 
 
 export default connect(
-	(store) => ({currentPlayingInPlayer: store.audioPlayer.track}),
+	(store) => ({currentPlayingInPlayer: store.audioPlayer.track, currentPlayingGlobally: store.currentPlayingTrack}),
 	(dispatch) => bindActionCreators({ addTrackToPlayer, removeTrackFromPlayer }, dispatch)
 )(Track);

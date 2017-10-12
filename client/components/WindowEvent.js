@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class WindowEvent extends Component {
 
 	handleEvent = (event) => {
-		console.log(event);
 		if (this.props.onEventHandled) {
 			this.props.onEventHandled(event);
 		}
