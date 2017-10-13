@@ -47,8 +47,12 @@
 		    &[disabled] {
 				cursor: default;
 
+		    	&:not(.play-button) {
+		    		color: @grey;
+		    	}
+
 				&:hover, &:active {
-					color: inherit;
+					color: @grey;
 				}
 			}
 		}	
