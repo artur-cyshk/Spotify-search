@@ -3,7 +3,7 @@ import {
   PLAY_NEXT_TRACK, PLAY_PREV_TRACK,
   CHANGE_TRACK_STATE, CHANGE_TRACK_STATE_READY, CHANGE_TRACK_STATE_FAILURE
 } from '../types';
-import { SPOTIFY_METHODS } from '../../constants';
+import { SPOTIFY_METHODS, GETTING_CURRENT_PLAYING_DELAY } from '../../constants';
 
 const trackReady = (res, err) => {
   return {
@@ -24,7 +24,7 @@ export const changeTrackState = (options, isPlayingNow, needRefresh) => {
     type: CHANGE_TRACK_STATE,
     onSuccess: (res, dispatch) => {
       if (needRefresh) {
-        setTimeout(()=> dispatch(getCurrentPlayingTrack()), 500);
+        setTimeout(()=> dispatch(getCurrentPlayingTrack()), GETTING_CURRENT_PLAYING_DELAY.afterChangeState);
       }else {
         dispatch(changeTrackStateReady({ isPlayingNow: isPlayingNow }, null));
       }
@@ -40,7 +40,7 @@ export const changeTrackState = (options, isPlayingNow, needRefresh) => {
 export const playTrack = (options, next) => {
   return { 
     type: next ? PLAY_NEXT_TRACK : PLAY_PREV_TRACK,
-    onSuccess: (res, dispatch) => setTimeout(()=> dispatch(getCurrentPlayingTrack()), 1500),
+    onSuccess: (res, dispatch) => setTimeout(()=> dispatch(getCurrentPlayingTrack()), GETTING_CURRENT_PLAYING_DELAY.afterPlay),
     onFailure: (res, dispatch) => dispatch(trackReady(null, res)),
     spotifyData: {
       method: next ? SPOTIFY_METHODS.skipToNext : SPOTIFY_METHODS.skipToPrevious,

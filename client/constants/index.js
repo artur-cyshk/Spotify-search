@@ -6,6 +6,10 @@ export const PLAYLIST_TRACKS_LIMIT = 100;
 export const SEARCH_DEBOUNCE_IN_MS = 500;
 export const UNAUTHORIZED_STATUS = 401;
 export const MOBILE_SCROLL_OFFSET = 150;
+export const GETTING_CURRENT_PLAYING_DELAY = {
+	afterPlay: 1500,
+	afterChangeState: 500
+};
 
 export const SPOTIFY_METHODS = {
 	searchTracks: 'searchTracks',

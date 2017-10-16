@@ -39,7 +39,7 @@ class Track extends Component {
 			<li title={smarted ? `${artists} - ${info.name}` : ''} className={`track-in-list ${inline ? 'inline' : ''} ${smarted ? 'smarted' : ''}`}>
 				<img src={(images[0] || {}).url || EMPTY_IMAGE_SRC}/>
 				{inline ?   
-					<div className="track-in-list-info">
+					<div title={`${artists} - ${info.name}`} className="track-in-list-info">
 						<span>{artists} - {info.name}</span>
 					</div> : 
 					<div className="track-in-list-info">
