@@ -29,4 +29,29 @@
     div[class^="audioComponents__volumeAdjustBox"] {
         background: @darkYellow;
     }
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.26);
+        border: 0;
+        z-index: 10;
+        cursor: pointer;
+        border-bottom-left-radius: 5px;
+        outline: none;
+        font-size: 20px;
+        transition: 0.2s linear all;
+        color: white;
+        outline: none;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        &:active {
+            color: @darkYellow;
+        }
+    }
 }

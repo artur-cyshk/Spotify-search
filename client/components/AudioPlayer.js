@@ -25,7 +25,10 @@ class AudioPlayer extends Component {
         ];
         return (
             <div className="audio-player">
-                {playlist && 
+                <button className="close-button" onClick={this.props.removeTrackFromPlayer}>
+                    <i className="fa fa-times" aria-hidden="true"></i>
+                </button>
+                {playlist &&
                     <Audio
                         {...AUDIO_PLAYER_SETS}
                         playlist={playlist}
@@ -44,7 +47,8 @@ AudioPlayer.propTypes = {
             artists: PropTypes.arrayOf(PropTypes.object),
             name: PropTypes.string
         })        
-    })
+    }),
+    removeTrackFromPlayer: PropTypes.func
 };
 
 export default AudioPlayer;
