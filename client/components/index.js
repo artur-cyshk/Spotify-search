@@ -15,8 +15,9 @@ import Playlist from './Playlist';
 import PlaylistInfo from './PlaylistInfo';
 import ModalWindow from './ModalWindow';
 import Popup from './Popup';
+import ContextMenu from './ContextMenu';
 import Root from './Root';
 
 export {
-	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, ModalWindow, Popup, WindowEvent, AudioPlayer, Header, Profile, Playlist, Playlists, PlaylistInfo
+	 Logo, Login, Search, CurrentPlayingTrack, Track, Navigate, Spinner, Logout, Root, ModalWindow, Popup, ContextMenu, WindowEvent, AudioPlayer, Header, Profile, Playlist, Playlists, PlaylistInfo
 }

@@ -5,6 +5,7 @@ import '../styles/popup.less';
 class Popup extends Component {
 
 	componentDidMount() {
+		console.log(this.props);
 	}
 
 	componentWillUnmount() {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { EMPTY_IMAGE_SRC, COMMON_DATA } from '../constants';
+import { ContextMenu } from './';
+import { Playlists } from '../containers';
 import '../styles/track.less';
 
 class Track extends Component {
@@ -49,17 +51,22 @@ class Track extends Component {
 					</div>
 				}
 				<div className="actions">
-					<button
-						className={`preview-button ${isPlayingLocally ? 'active' : ''}`} 
-						onClick={isPlayingLocally ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
-						disabled={!info.preview_url} 
-						title={isPlayingLocally ? `Now playing ${artists} - ${info.name}` : `Listen "${artists} - ${info.name}" preview`}
-					>
-						<i className="fa fa-music"></i>
-					</button>
-					{ isPremium && <button title={isPlayingGlobally && currentPlayingGloballyTrack.is_playing ? 'Pause track' : 'Play track'} className="play-button" disabled={loadingTrackState} onClick={this.changeTrackState}>
-                        <i className={`fa ${isPlayingGlobally && currentPlayingGloballyTrack.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
-                    </button> }
+                    <ContextMenu title="Select playlist"> 	
+	                    <button
+							className={`preview-button action-button ${isPlayingLocally ? 'active' : ''}`} 
+							onClick={isPlayingLocally ? this.removeTrackFromAudioPlayer : this.addTrackToAudioPlayer}
+							disabled={!info.preview_url} 
+							title={isPlayingLocally ? `Now playing ${artists} - ${info.name}` : `Listen "${artists} - ${info.name}" preview`}
+						>
+							<i className="fa fa-music"></i>
+						</button>
+						{ isPremium && <button title={isPlayingGlobally && currentPlayingGloballyTrack.is_playing ? 'Pause track' : 'Play track'} className="play-button action-button" disabled={loadingTrackState} onClick={this.changeTrackState}>
+	                        <i className={`fa ${isPlayingGlobally && currentPlayingGloballyTrack.is_playing ? 'fa-pause-circle' : 'fa-play-circle'}`} />
+	                    </button> }
+	                    { isPremium && <button title="Add to playlist" className="play-button action-button" onClick={this.toggleTrackPopupVisibility}>
+	                        <i className="fa fa-plus" />
+	                    </button> }
+	                </ContextMenu>    
 				</div>	
 			</li>
 		);
